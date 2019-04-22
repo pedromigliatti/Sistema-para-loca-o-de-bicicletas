@@ -16,7 +16,7 @@ public class JDBCUtil {
 
         if (dataSource == null) {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            String url = "jdbc:derby://localhost:1527/Login";
+            String url = "jdbc:derby://localhost:1527/Sistema-de-locacao-de-bicicletas";
             String user = "root";
             String password = "root";
             dataSource = new DriverManagerDataSource(url, user, password);

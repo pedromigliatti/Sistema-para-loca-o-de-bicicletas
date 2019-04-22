@@ -28,7 +28,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
 
         builder.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select email, senha, ativo"
-                        + " from Usuario where email = ?")
+                        + " from Cliente where email = ?")
                 .authoritiesByUsernameQuery("select email, nome "
                         + "from Papel where email = ?")
                 .passwordEncoder(new BCryptPasswordEncoder());
@@ -38,8 +38,7 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/admin/**").hasRole("ADMIN")
-                .antMatchers("/cliente/**").hasRole("CLIENTE")
-                .antMatchers("/locadora/**").hasRole("LOCADORA")
+                .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
