@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pedro
  */
-@WebServlet(name="Ver Cliente Servlet", urlPatterns = "/verCliente")
+@WebServlet(name="Ver Cliente Servlet", urlPatterns = {"/admin/verCliente"})
 public class VerClientesServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
-@WebServlet(name="Novo Cliente", urlPatterns = "/Sistema-para-locacao-de-bicicletas/novoCliente")
+@WebServlet(name="Novo Cliente", urlPatterns = {"/admin/novoCliente"})
 public class NovoClienteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)

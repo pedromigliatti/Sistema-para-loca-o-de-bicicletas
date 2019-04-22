@@ -16,7 +16,7 @@
     
     <servlet-mapping>
         <servlet-name>Ver Cliente Servlet</servlet-name>
-        <url-pattern>/verCliente</url-pattern>
+        <url-pattern>/admin/verCliente</url-pattern>
     </servlet-mapping>
     
     <session-config>

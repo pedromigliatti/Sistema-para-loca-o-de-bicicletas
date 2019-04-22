@@ -10,7 +10,7 @@
             Este conteúdo só será visível para usuários que desempenhem 
             o papel "ADMIN" <br/><br/>
 
-            <a href="verCliente">Ver Cliente</a>
+            <a href="admin/verCliente">Ver Cliente</a>
             <br>
             <a href="verLocadoras">Ver Locadoras</a>
         </sec:authorize>
