@@ -12,7 +12,7 @@
         <title>Cadastrar um novo cliente</title>
     </head>
     <body>
-          <form action="/Sistema-para-locacao-de-bicicletas/novoCliente" method="post">
+          <form action="/admin/novoCliente" method="post">
             <fieldset>
 
                 <!-- Form Name -->

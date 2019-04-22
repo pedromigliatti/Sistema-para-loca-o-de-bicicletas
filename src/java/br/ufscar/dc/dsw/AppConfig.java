@@ -38,8 +38,10 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .httpBasic()
+                .realmName("todos/index.jsp")
                 .and()
                 .authorizeRequests()
+                .antMatchers("/todos/**", "/signup", "/about").permitAll()
                 .antMatchers("/admin/**").hasRole("ADMIN")
                 .antMatchers("/user/**").hasRole("USER")
                 .anyRequest().authenticated()

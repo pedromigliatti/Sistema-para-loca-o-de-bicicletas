@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
-@WebServlet(name="Novo Cliente", urlPatterns = {"/admin/novoCliente"})
+@WebServlet(name="Novo Cliente Servlet", urlPatterns = {"/admin/novoCliente"})
 public class NovoClienteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -38,7 +38,7 @@ public class NovoClienteServlet extends HttpServlet {
 //            usuario = usuarioDAO.gravarUsuario(usuario);
 //            
             request.setAttribute("mensagem", "Obrigado pela aposta!");
-//            request.getRequestDispatcher("admin/novaLocadora.jsp").forward(request, response);
+            request.getRequestDispatcher("/admin/verClientes").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());

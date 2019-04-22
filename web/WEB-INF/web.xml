@@ -19,6 +19,20 @@
         <url-pattern>/admin/verCliente</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Novo Cliente Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.NovoClienteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Novo Cliente Servlet</servlet-name>
+        <url-pattern>/admin/novoCliente</url-pattern>
+    </servlet-mapping>
+    
+    <welcome-file-list>
+        <welcome-file>todos/index.jsp</welcome-file>
+    </welcome-file-list>
+    
     <session-config>
         <session-timeout>
             30

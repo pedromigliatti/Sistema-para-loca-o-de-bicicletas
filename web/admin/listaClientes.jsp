@@ -27,5 +27,7 @@
                 </c:forEach>
             </table>
         </c:if>
+            
+            <a href="novoCliente.jsp">Criar Novo Cliente</a>
     </body>
 </html>
