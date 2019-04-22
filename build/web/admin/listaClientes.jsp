@@ -21,8 +21,9 @@
                 </tr>
                 <c:forEach items="${requestScope.listaClientes}" var="cliente">
                     <tr>
-                        <td>${cliente.email}</td>
+                        <td>${cliente.email}</td> 
                         <td>${cliente.nome}</td>
+                        <td><a href="deletaCliente?id=<c:out value='${cliente.id}' />">Deletar</a></td>
                     </tr>
                 </c:forEach>
             </table>

@@ -12,7 +12,7 @@
         <title>Cadastrar um novo cliente</title>
     </head>
     <body>
-          <form action="/admin/novoCliente" method="post">
+          <form action="novoCliente" method="post">
             <fieldset>
 
                 <!-- Form Name -->

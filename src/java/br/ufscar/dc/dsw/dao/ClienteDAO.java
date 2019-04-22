@@ -106,7 +106,7 @@ public class ClienteDAO {
     }
 
     public void delete(Cliente cliente) {
-        String sql = "DELETE FROM Livro where id = ?";
+        String sql = "DELETE FROM Cliente where id = ?";
 
         try {
             Connection conn = this.getConnection();

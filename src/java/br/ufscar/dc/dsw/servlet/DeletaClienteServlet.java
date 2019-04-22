@@ -20,25 +20,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.beanutils.BeanUtils;
 
-@WebServlet(name="Novo Cliente Servlet", urlPatterns = {"/admin/novoCliente"})
-public class NovoClienteServlet extends HttpServlet {
+@WebServlet(name="Deleta Cliente Servlet", urlPatterns = {"/admin/deletaCliente"})
+public class DeletaClienteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
 
-        try {
-//            ClienteDAO clienteDAO = new ClienteDAO();
-            
-//            Usuario usuario = new Usuario();
-//            usuario.setNome(nafb.getNome());
-//            usuario.setEmail(nafb.getEmail());
-//            usuario.setTelefone(nafb.getTelefone());
-//            usuario.setDataDeNascimento(dataNascimento);
-//            usuario = usuarioDAO.gravarUsuario(usuario);
-//            
-//            request.setAttribute("mensagem", "Obrigado pela aposta!");
-            request.getRequestDispatcher("verClientes").forward(request, response);
+        try 
+        {
+            ClienteDAO dao = new ClienteDAO();
+            int id = Integer.parseInt(request.getParameter("id"));
+            Cliente cliente = new Cliente(id);
+            dao.delete(cliente);
+            request.setAttribute("mensagem", "Cliente deletado!");
+            response.sendRedirect("verCliente");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
@@ -86,4 +82,3 @@ public class NovoClienteServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

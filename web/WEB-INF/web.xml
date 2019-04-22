@@ -29,6 +29,16 @@
         <url-pattern>/admin/novoCliente</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Deleta Cliente Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.DeletaClienteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Deleta Cliente Servlet</servlet-name>
+        <url-pattern>/admin/deletaCliente</url-pattern>
+    </servlet-mapping>
+    
     <welcome-file-list>
         <welcome-file>todos/index.jsp</welcome-file>
     </welcome-file-list>
