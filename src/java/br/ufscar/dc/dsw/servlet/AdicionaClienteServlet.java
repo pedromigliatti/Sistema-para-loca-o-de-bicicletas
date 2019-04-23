@@ -8,6 +8,7 @@ package br.ufscar.dc.dsw.servlet;
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import java.io.IOException;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,24 +20,16 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pedro
  */
-@WebServlet(name = "Edita Cliente Servlet", urlPatterns = {"/admin/editaCliente"})
-public class EditaClienteServlet extends HttpServlet {
+
+
+@WebServlet(name="Adiciona Cliente Servlet", urlPatterns = {"/admin/adicionaCliente"})
+public class AdicionaClienteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        try {
-            ClienteDAO dao = new ClienteDAO(); 
-            int id = Integer.parseInt(request.getParameter("id"));
-            Cliente cliente = dao.get(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("editaCliente.jsp");
-            request.setAttribute("cliente", cliente);
-            dispatcher.forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("mensagem", e.getLocalizedMessage());
-            request.getRequestDispatcher("erro.jsp").forward(request, response);
-        }
+        RequestDispatcher dispatcher = request.getRequestDispatcher("novoCliente.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

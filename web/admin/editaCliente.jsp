@@ -13,11 +13,11 @@
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
-                <form action="novoCliente">
+                <form action="atualizaCliente">
             <fieldset>
 
                 <!-- Form Name -->
-                <c:if test="${cliente.nome == null}"> <legend>Novo Cliente</legend> </c:if>
+                <legend>Edita Cliente</legend>
                 
                 <c:if test="${cliente != null}">
                     <div class="form-group">

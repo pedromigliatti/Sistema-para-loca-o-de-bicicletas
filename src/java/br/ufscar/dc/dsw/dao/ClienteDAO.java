@@ -148,6 +148,36 @@ public class ClienteDAO {
             throw new RuntimeException(e);
         }
     }
+    
+    public Cliente get(String email) {
+        Cliente cliente = null;
+        String sql = "SELECT * FROM Cliente WHERE email = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                int id = resultSet.getInt("id");
+                String nome = resultSet.getString("nome");
+                String cpf = resultSet.getString("cpf");
+                String telefone = resultSet.getString("telefone");
+                String sexo = resultSet.getString("sexo");             
+                Date nascimento = resultSet.getDate("nascimento");
+                cliente = new Cliente(id, email, cpf, nome, telefone, sexo, nascimento);
+ 
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return cliente;
+    }
 
     public Cliente get(int id) {
         Cliente cliente = null;

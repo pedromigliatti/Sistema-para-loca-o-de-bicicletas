@@ -30,6 +30,6 @@
             </table>
         </c:if>
             
-            <a href="novoCliente.jsp">Criar Novo Cliente</a>
+            <a href="adicionaCliente">Criar Novo Cliente</a>
     </body>
 </html>

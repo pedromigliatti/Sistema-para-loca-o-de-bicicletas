@@ -6,9 +6,11 @@
 package br.ufscar.dc.dsw.servlet;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.LocacaoDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
+import br.ufscar.dc.dsw.pojo.Locacao;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,19 +21,20 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pedro
  */
-@WebServlet(name = "Edita Cliente Servlet", urlPatterns = {"/admin/editaCliente"})
-public class EditaClienteServlet extends HttpServlet {
+@WebServlet(name="Ver Locacoes Cliente Servlet", urlPatterns = {"/user/verLocacoesCliente"})
+public class VerLocacoesClienteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+        List<Locacao> todasLocacoes;
         try {
-            ClienteDAO dao = new ClienteDAO(); 
-            int id = Integer.parseInt(request.getParameter("id"));
-            Cliente cliente = dao.get(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("editaCliente.jsp");
-            request.setAttribute("cliente", cliente);
-            dispatcher.forward(request, response);
+            ClienteDAO clienteDAO = new ClienteDAO();
+            String cpf = clienteDAO.get(request.getParameter("nome")).getCpf();
+            LocacaoDAO locacaoDAO = new LocacaoDAO();
+            todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
+            request.setAttribute("listaLocacoes", todasLocacoes);
+            request.getRequestDispatcher("listaLocacoesCliente.jsp?").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
@@ -79,3 +82,4 @@ public class EditaClienteServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+

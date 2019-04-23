@@ -45,10 +45,10 @@ public class Locacao implements Serializable {
     private Date dataHora;
     @JoinColumn(name = "CPF_CLIENTE", referencedColumnName = "CPF")
     @ManyToOne(optional = false)
-    private Cliente cpfCliente;
+    private String cpfCliente;
     @JoinColumn(name = "CNPJ_LOCADORA", referencedColumnName = "CNPJ")
     @ManyToOne(optional = false)
-    private Locadora cnpjLocadora;
+    private String cnpjLocadora;
 
     public Locacao() {
     }
@@ -60,6 +60,13 @@ public class Locacao implements Serializable {
     public Locacao(Integer id, Date dataHora) {
         this.id = id;
         this.dataHora = dataHora;
+    }
+    
+    public Locacao(Integer id, Date dataHora, String cpf, String cnpj) {
+        this.id = id;
+        this.dataHora = dataHora;
+        this.cpfCliente = cpf;
+        this.cnpjLocadora = cnpj;
     }
 
     public Integer getId() {
@@ -78,19 +85,19 @@ public class Locacao implements Serializable {
         this.dataHora = dataHora;
     }
 
-    public Cliente getCpfCliente() {
+    public String getCpfCliente() {
         return cpfCliente;
     }
 
-    public void setCpfCliente(Cliente cpfCliente) {
+    public void setCpfCliente(String cpfCliente) {
         this.cpfCliente = cpfCliente;
     }
 
-    public Locadora getCnpjLocadora() {
+    public String getCnpjLocadora() {
         return cnpjLocadora;
     }
 
-    public void setCnpjLocadora(Locadora cnpjLocadora) {
+    public void setCnpjLocadora(String cnpjLocadora) {
         this.cnpjLocadora = cnpjLocadora;
     }
 

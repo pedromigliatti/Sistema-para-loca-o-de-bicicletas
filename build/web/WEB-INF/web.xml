@@ -79,6 +79,17 @@
         <url-pattern>/admin/atualizaCliente</url-pattern>
     </servlet-mapping>
 
+<servlet>
+        <servlet-name>Adiciona Cliente Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.AdicionaClienteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Adiciona Cliente Servlet</servlet-name>
+        <url-pattern>/admin/adicionaCliente</url-pattern>
+    </servlet-mapping>
+
+
         <servlet>
         <servlet-name>Edita Locadora Servlet</servlet-name>
         <servlet-class>br.ufscar.dc.dsw.servlet.EditaLocadoraServlet</servlet-class>
@@ -98,7 +109,17 @@
         <servlet-name>Atualiza Locadora Servlet</servlet-name>
         <url-pattern>/admin/atualizaLocadora</url-pattern>
     </servlet-mapping>
-            
+    
+   <servlet>
+        <servlet-name>Ver Locacoes Cliente Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.VerLocacoesClienteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Ver Locacoes Cliente Servlet</servlet-name>
+        <url-pattern>/user/verLocacoesCliente</url-pattern>
+    </servlet-mapping>
+                            
     <welcome-file-list>
         <welcome-file>todos/index.jsp</welcome-file>
     </welcome-file-list>

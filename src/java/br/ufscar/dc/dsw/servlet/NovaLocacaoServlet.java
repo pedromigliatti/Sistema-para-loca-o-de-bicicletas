@@ -8,30 +8,40 @@ package br.ufscar.dc.dsw.servlet;
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import java.io.IOException;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
  * @author pedro
  */
-@WebServlet(name = "Edita Cliente Servlet", urlPatterns = {"/admin/editaCliente"})
-public class EditaClienteServlet extends HttpServlet {
+@WebServlet(name="Nova Locacao Servlet", urlPatterns = {"/user/novaLocacao"})
+public class NovaLocacaoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
+
         try {
-            ClienteDAO dao = new ClienteDAO(); 
-            int id = Integer.parseInt(request.getParameter("id"));
-            Cliente cliente = dao.get(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("editaCliente.jsp");
-            request.setAttribute("cliente", cliente);
-            dispatcher.forward(request, response);
+            ClienteDAO clienteDAO = new ClienteDAO();
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            
+            Cliente cliente = new Cliente();
+            cliente.setEmail(request.getParameter("email"));
+            cliente.setSenha( encoder.encode(request.getParameter("senha")));
+            cliente.setCpf( request.getParameter("cpf"));
+            cliente.setNome( request.getParameter("nome"));
+            cliente.setTelefone( request.getParameter("telefone"));
+            cliente.setSexo( request.getParameter("sexo"));
+            cliente.setNascimento( java.sql.Date.valueOf(request.getParameter("nascimento")));
+            
+            clienteDAO.insert(cliente);
+            request.setAttribute("mensagem", "Cliente adicionado!");
+            response.sendRedirect("verCliente");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
@@ -79,3 +89,4 @@ public class EditaClienteServlet extends HttpServlet {
     }// </editor-fold>
 
 }
+
