@@ -73,6 +73,15 @@ public class Locadora implements Serializable {
         this.cidade = cidade;
         this.ativo = ativo;
     }
+    
+    public Locadora(int id,String email, String cnpj, String nome, String cidade) {
+        this.id = id;
+        this.email = email;
+        this.cnpj = cnpj;
+        this.nome = nome;
+        this.cidade = cidade;
+    }
+
 
     public Integer getId() {
         return id;

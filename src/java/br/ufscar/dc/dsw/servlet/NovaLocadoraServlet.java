@@ -10,29 +10,38 @@ import br.ufscar.dc.dsw.dao.LocadoraDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Locadora;
 import java.io.IOException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
  * @author pedro
  */
+@WebServlet(name="Nova Locadora Servlet", urlPatterns = {"/admin/novaLocadora"})
+public class NovaLocadoraServlet extends HttpServlet {
 
-@WebServlet(name="Ver Locadora Servlet", urlPatterns = {"/admin/verLocadora"})
-public class VerLocadorasServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        List<Locadora> todasLocadoras;
+
         try {
             LocadoraDAO locadoraDAO = new LocadoraDAO();
-            todasLocadoras = locadoraDAO.getAll();
-            request.setAttribute("listaLocadoras", todasLocadoras);
-            request.getRequestDispatcher("listaLocadoras.jsp").forward(request, response);
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            
+            Locadora locadora = new Locadora();
+            locadora.setEmail(request.getParameter("email"));
+            locadora.setSenha( encoder.encode(request.getParameter("senha")));
+            locadora.setCnpj( request.getParameter("cnpj"));
+            locadora.setNome( request.getParameter("nome"));
+            locadora.setCidade( request.getParameter("cidade"));
+            
+            locadoraDAO.insert(locadora);
+            request.setAttribute("mensagem", "Lcadora adicionada!");
+            response.sendRedirect("verLocadora");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
@@ -78,4 +87,7 @@ public class VerLocadorasServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
+
+

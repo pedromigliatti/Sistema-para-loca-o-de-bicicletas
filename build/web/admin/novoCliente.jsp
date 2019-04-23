@@ -12,7 +12,8 @@
         <title>Cadastrar um novo cliente</title>
     </head>
     <body>
-          <form action="novoCliente" method="post">
+        <sec:authorize access="hasRole('ADMIN')">
+          <form action="novoCliente">
             <fieldset>
 
                 <!-- Form Name -->
@@ -90,6 +91,7 @@
 
                     </div>
                 </div>
+                <br>
 
                 <!-- Button -->
                 <div class="form-group">
@@ -101,6 +103,7 @@
 
             </fieldset>
         </form>
+            </sec:authorize>
 
     </body>
 </html>

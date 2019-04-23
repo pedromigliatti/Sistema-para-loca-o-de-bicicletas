@@ -5,9 +5,12 @@
  */
 package br.ufscar.dc.dsw.servlet;
 
+import br.ufscar.dc.dsw.JDBCUtil;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +21,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.sql.DataSource;
 import org.apache.commons.beanutils.BeanUtils;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @WebServlet(name="Novo Cliente Servlet", urlPatterns = {"/admin/novoCliente"})
 public class NovoClienteServlet extends HttpServlet {
@@ -28,17 +33,21 @@ public class NovoClienteServlet extends HttpServlet {
 
 
         try {
-//            ClienteDAO clienteDAO = new ClienteDAO();
+            ClienteDAO clienteDAO = new ClienteDAO();
+            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             
-//            Usuario usuario = new Usuario();
-//            usuario.setNome(nafb.getNome());
-//            usuario.setEmail(nafb.getEmail());
-//            usuario.setTelefone(nafb.getTelefone());
-//            usuario.setDataDeNascimento(dataNascimento);
-//            usuario = usuarioDAO.gravarUsuario(usuario);
-//            
-//            request.setAttribute("mensagem", "Obrigado pela aposta!");
-            request.getRequestDispatcher("verClientes").forward(request, response);
+            Cliente cliente = new Cliente();
+            cliente.setEmail(request.getParameter("email"));
+            cliente.setSenha( encoder.encode(request.getParameter("senha")));
+            cliente.setCpf( request.getParameter("cpf"));
+            cliente.setNome( request.getParameter("nome"));
+            cliente.setTelefone( request.getParameter("telefone"));
+            cliente.setSexo( request.getParameter("sexo"));
+            cliente.setNascimento( java.sql.Date.valueOf(request.getParameter("nascimento")));
+            
+            clienteDAO.insert(cliente);
+            request.setAttribute("mensagem", "Cliente adicionado!");
+            response.sendRedirect("verCliente");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
