@@ -122,8 +122,8 @@ public class ClienteDAO {
         }
     }
 
-    public void update(Cliente cliente) {
-        String userSql = "UPDATE Livro SET email=?, senha=?, cpf=?, nome=?, telefone=?, sexo=?, nascimento=?, ativo=?";
+    public void update(Cliente cliente, int id) {
+        String userSql = "UPDATE Cliente SET email=?, senha=?, cpf=?, nome=?, telefone=?, sexo=?, nascimento=?, ativo=?";
         userSql += " WHERE id = ?";
 
         try {
@@ -139,6 +139,7 @@ public class ClienteDAO {
             userStatement.setString(6, cliente.getSexo());
             userStatement.setDate(7, (Date) cliente.getNascimento());
             userStatement.setBoolean(8, true);
+            userStatement.setInt(9,id);
             userStatement.execute();
 
             userStatement.close();
@@ -150,7 +151,7 @@ public class ClienteDAO {
 
     public Cliente get(int id) {
         Cliente cliente = null;
-        String sql = "SELECT * FROM Livro WHERE id = ?";
+        String sql = "SELECT * FROM Cliente WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();

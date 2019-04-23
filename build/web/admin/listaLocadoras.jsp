@@ -24,6 +24,7 @@
                         <td>${locadora.email}</td> 
                         <td>${locadora.nome}</td>
                         <td><a href="deletaLocadora?id=<c:out value='${locadora.id}' />">Deletar</a></td>
+                        <td><a href="editaLocadora?id=<c:out value='${locadora.id}' />">Modificar</a></td>
                     </tr>
                 </c:forEach>
             </table>

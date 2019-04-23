@@ -49,6 +49,46 @@
         <url-pattern>/admin/deletaCliente</url-pattern>
     </servlet-mapping>
     
+    <servlet>
+        <servlet-name>Edita Cliente Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.EditaClienteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Edita Cliente Servlet</servlet-name>
+        <url-pattern>/admin/editaCliente</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Atualiza Cliente Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.AtualizaClienteServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Atualiza Cliente Servlet</servlet-name>
+        <url-pattern>/admin/atualizaCliente</url-pattern>
+    </servlet-mapping>
+
+        <servlet>
+        <servlet-name>Edita Locadora Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.EditaLocadoraServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Edita Locadora Servlet</servlet-name>
+        <url-pattern>/admin/editaLocadora</url-pattern>
+    </servlet-mapping>
+    
+    <servlet>
+        <servlet-name>Atualiza Locadora Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.AtualizaLocadoraServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Atualiza Locadora Servlet</servlet-name>
+        <url-pattern>/admin/atualizaLocadora</url-pattern>
+    </servlet-mapping>
+            
     <welcome-file-list>
         <welcome-file>todos/index.jsp</welcome-file>
     </welcome-file-list>

@@ -119,8 +119,8 @@ public class LocadoraDAO {
         }
     }
 
-    public void update(Cliente cliente) {
-        String userSql = "UPDATE Livro SET email=?, senha=?, cpf=?, nome=?, telefone=?, sexo=?, nascimento=?, ativo=?";
+    public void update(Locadora locadora, int id) {
+        String userSql = "UPDATE Locadora SET email=?, senha=?, cnpj=?, nome=?, cidade=?, ativo=?";
         userSql += " WHERE id = ?";
 
         try {
@@ -128,14 +128,13 @@ public class LocadoraDAO {
             PreparedStatement userStatement = conn.prepareStatement(userSql);
 
             userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, cliente.getEmail());
-            userStatement.setString(2, encoder.encode(cliente.getSenha()));
-            userStatement.setString(3, cliente.getCpf());
-            userStatement.setString(4, cliente.getNome());
-            userStatement.setString(5, cliente.getTelefone());
-            userStatement.setString(6, cliente.getSexo());
-            userStatement.setDate(7, (Date) cliente.getNascimento());
-            userStatement.setBoolean(8, true);
+            userStatement.setString(1, locadora.getEmail());
+            userStatement.setString(2, encoder.encode(locadora.getSenha()));
+            userStatement.setString(3, locadora.getCnpj());
+            userStatement.setString(4, locadora.getNome());
+            userStatement.setString(5, locadora.getCidade());
+            userStatement.setBoolean(6, true);
+            userStatement.setInt(7, id);
             userStatement.execute();
 
             userStatement.close();
@@ -145,9 +144,9 @@ public class LocadoraDAO {
         }
     }
 
-    public Cliente get(int id) {
-        Cliente cliente = null;
-        String sql = "SELECT * FROM Livro WHERE id = ?";
+    public Locadora get(int id) {
+        Locadora locadora = null;
+        String sql = "SELECT * FROM Locadora WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -158,11 +157,9 @@ public class LocadoraDAO {
             if (resultSet.next()) {
                 String nome = resultSet.getString("nome");
                 String email = resultSet.getString("email");
-                String cpf = resultSet.getString("cpf");
-                String telefone = resultSet.getString("telefone");
-                String sexo = resultSet.getString("sexo");             
-                Date nascimento = resultSet.getDate("nascimento");
-                cliente = new Cliente(id, email, cpf, nome, telefone, sexo, nascimento);
+                String cnpj = resultSet.getString("cnpj");
+                String cidade = resultSet.getString("cidade");
+                locadora = new Locadora(id, email, cnpj, nome, cidade);
  
             }
 
@@ -172,7 +169,7 @@ public class LocadoraDAO {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
-        return cliente;
+        return locadora;
     }
     
 }

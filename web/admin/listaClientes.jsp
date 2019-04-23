@@ -24,6 +24,7 @@
                         <td>${cliente.email}</td> 
                         <td>${cliente.nome}</td>
                         <td><a href="deletaCliente?id=<c:out value='${cliente.id}' />">Deletar</a></td>
+                        <td><a href="editaCliente?id=<c:out value='${cliente.id}' />">Editar</a></td>
                     </tr>
                 </c:forEach>
             </table>
