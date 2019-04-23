@@ -32,6 +32,6 @@
             </table>
         </c:if>
             <br>
-            <a href="novaLocacao.jsp">Criar Nova Locacao</a>
+            <a href="adicionaLocacao?cpf=<c:out value='${cpf}'/>">Criar Nova Locacao</a>
     </body>
 </html>

@@ -6,7 +6,9 @@
 package br.ufscar.dc.dsw.servlet;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.LocacaoDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
+import br.ufscar.dc.dsw.pojo.Locacao;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -27,21 +29,16 @@ public class NovaLocacaoServlet extends HttpServlet {
 
 
         try {
-            ClienteDAO clienteDAO = new ClienteDAO();
-            BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+            LocacaoDAO locacaoDAO = new LocacaoDAO();
             
-            Cliente cliente = new Cliente();
-            cliente.setEmail(request.getParameter("email"));
-            cliente.setSenha( encoder.encode(request.getParameter("senha")));
-            cliente.setCpf( request.getParameter("cpf"));
-            cliente.setNome( request.getParameter("nome"));
-            cliente.setTelefone( request.getParameter("telefone"));
-            cliente.setSexo( request.getParameter("sexo"));
-            cliente.setNascimento( java.sql.Date.valueOf(request.getParameter("nascimento")));
+            Locacao locacao = new Locacao();
+            locacao.setCpfCliente(request.getParameter("cpf"));
+            locacao.setCnpjLocadora(request.getParameter("cnpj"));
+            locacao.setDataHora( java.sql.Date.valueOf(request.getParameter("data")));
             
-            clienteDAO.insert(cliente);
-            request.setAttribute("mensagem", "Cliente adicionado!");
-            response.sendRedirect("verCliente");
+            locacaoDAO.insert(locacao);
+            request.setAttribute("mensagem", "Locacao adicionado!");
+            response.sendRedirect("verLocacoesCliente");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());

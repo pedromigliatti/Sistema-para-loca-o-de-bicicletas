@@ -9,11 +9,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastrar um novo cliente</title>
+        <title>Nova Locacao</title>
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
-                <form action="novoLocacao">
+                <form action="novaLocacao">
             <fieldset>
 
                 <!-- Form Name -->
@@ -32,7 +32,7 @@
                 <div class="form-group" hidden>
                     <label class="col-md-4 control-label" for="cpf">CPF Cliente</label>  
                     <div class="col-md-4">
-                        <input id="email" name="cpf" type="text" placeholder="CPF Cliente" class="form-control input-md" required=""value="${cliente.email}">
+                        <input id="email" name="cpf" type="text" placeholder="CPF Cliente" class="form-control input-md" required=""value="${cpf}">
 
                     </div>
                 </div>

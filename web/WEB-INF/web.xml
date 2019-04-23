@@ -89,6 +89,15 @@
         <url-pattern>/admin/adicionaCliente</url-pattern>
     </servlet-mapping>
 
+<servlet>
+        <servlet-name>Adiciona Locacao Servlet</servlet-name>
+        <servlet-class>br.ufscar.dc.dsw.servlet.AdicionaLocacaoServlet</servlet-class>
+    </servlet>
+    
+    <servlet-mapping>
+        <servlet-name>Adiciona Locacao Servlet</servlet-name>
+        <url-pattern>/user/adicionaLocacao</url-pattern>
+    </servlet-mapping>
 
         <servlet>
         <servlet-name>Edita Locadora Servlet</servlet-name>

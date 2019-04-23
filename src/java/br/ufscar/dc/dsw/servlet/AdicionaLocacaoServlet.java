@@ -5,12 +5,8 @@
  */
 package br.ufscar.dc.dsw.servlet;
 
-import br.ufscar.dc.dsw.dao.ClienteDAO;
-import br.ufscar.dc.dsw.dao.LocacaoDAO;
-import br.ufscar.dc.dsw.pojo.Cliente;
-import br.ufscar.dc.dsw.pojo.Locacao;
 import java.io.IOException;
-import java.util.List;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -21,26 +17,15 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author pedro
  */
-@WebServlet(name="Ver Locacoes Cliente Servlet", urlPatterns = {"/user/verLocacoesCliente"})
-public class VerLocacoesClienteServlet extends HttpServlet {
+@WebServlet(name="Adiciona Locacao Servlet", urlPatterns = {"/user/adicionaLocacao"})
+public class AdicionaLocacaoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        List<Locacao> todasLocacoes;
-        try {
-            ClienteDAO clienteDAO = new ClienteDAO();
-            String cpf = clienteDAO.get(request.getParameter("nome")).getCpf();
-            LocacaoDAO locacaoDAO = new LocacaoDAO();
-            todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
-            request.setAttribute("listaLocacoes", todasLocacoes);
-            request.setAttribute("cpf", cpf);
-            request.getRequestDispatcher("listaLocacoesCliente.jsp").forward(request, response);
-        } catch (Exception e) {
-            e.printStackTrace();
-            request.setAttribute("mensagem", e.getLocalizedMessage());
-            request.getRequestDispatcher("erro.jsp").forward(request, response);
-        }
+        
+        request.setAttribute("cpf", request.getParameter("cpf"));
+        RequestDispatcher dispatcher = request.getRequestDispatcher("novaLocacao.jsp");
+        dispatcher.forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -83,4 +68,3 @@ public class VerLocacoesClienteServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-
