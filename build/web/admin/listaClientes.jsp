@@ -11,7 +11,7 @@
         <h1>Clientes</h1>
         <hr>
         <c:if test="${empty requestScope.listaClientes}">
-            Não há apostas!
+            Não há clientes!
         </c:if>
         <c:if test="${!empty requestScope.listaClientes}">
             <table>

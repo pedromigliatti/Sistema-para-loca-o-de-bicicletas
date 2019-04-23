@@ -16,5 +16,7 @@
         <a href="adminIndex.jsp">Entrar</a>
         <br>
         <a href="todos/listaLocadorasCidade.jsp">Listar Locadoras por Cidade</a>
+        <br>
+        <a href="todos/verLocadorasTodos">Listar Locadoras</a>
     </body>
 </html>

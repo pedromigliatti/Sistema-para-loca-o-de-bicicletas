@@ -23,15 +23,9 @@
                     <tr>
                         <td>${locadora.email}</td> 
                         <td>${locadora.nome}</td>
-                        <sec:authorize access="hasRole('ADMIN')">
-                        <td><a href="deletaLocadora?id=<c:out value='${locadora.id}' />">Deletar</a></td>
-                        <td><a href="editaLocadora?id=<c:out value='${locadora.id}' />">Modificar</a></td>
-                        </sec:authorize>
                     </tr>
                 </c:forEach>
             </table>
         </c:if>
-            <br>
-            <a href="novaLocadora.jsp">Criar Nova Locadora</a>
     </body>
 </html>

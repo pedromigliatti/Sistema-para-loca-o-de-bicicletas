@@ -61,7 +61,7 @@ public class LocadoraDAO {
 
             roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, locadora.getEmail());
-            roleStatement.setString(2, "ROLE_USER");
+            roleStatement.setString(2, "ROLE_LOCADORA");
             roleStatement.execute();
             
             conn.close();

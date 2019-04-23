@@ -11,7 +11,7 @@
         <h1>Locadoras</h1>
         <hr>
         <c:if test="${empty requestScope.listaLocadoras}">
-            Não há apostas!
+            Não há locadoras!
         </c:if>
         <c:if test="${!empty requestScope.listaLocadoras}">
             <table>
@@ -23,8 +23,10 @@
                     <tr>
                         <td>${locadora.email}</td> 
                         <td>${locadora.nome}</td>
+                        <sec:authorize access="hasRole('ADMIN')">
                         <td><a href="deletaLocadora?id=<c:out value='${locadora.id}' />">Deletar</a></td>
                         <td><a href="editaLocadora?id=<c:out value='${locadora.id}' />">Modificar</a></td>
+                        </sec:authorize>
                     </tr>
                 </c:forEach>
             </table>

@@ -12,7 +12,7 @@
 
             <a href="admin/verCliente">Ver Cliente</a>
             <br>
-            <a href="admin/verLocadora">Ver Locadoras</a>
+            <a href="verLocadoraTodos">Ver Locadoras</a>
         </sec:authorize>
 
         <sec:authorize access="hasRole('USER')">
