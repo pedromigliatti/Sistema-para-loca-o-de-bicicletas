@@ -50,7 +50,7 @@ public class ClienteDAO {
 
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, cliente.getEmail());
-            userStatement.setString(2, encoder.encode(cliente.getSenha()));
+            userStatement.setString(2, cliente.getSenha());
             userStatement.setString(3, cliente.getCpf());
             userStatement.setString(4, cliente.getNome());
             userStatement.setString(5, cliente.getTelefone());
@@ -76,7 +76,7 @@ public class ClienteDAO {
 
         List<Cliente> listaClientes = new ArrayList<>();
 
-        String sql = "SELECT * FROM Cliente";
+        String sql = "SELECT * FROM Cliente WHERE ativo=1";
 
         try {
             Connection conn = this.getConnection();
@@ -106,13 +106,14 @@ public class ClienteDAO {
     }
 
     public void delete(Cliente cliente) {
-        String sql = "DELETE FROM Cliente where id = ?";
+        String sql = "UPDATE Cliente SET ativo=? WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();
             PreparedStatement statement = conn.prepareStatement(sql);
-
-            statement.setInt(1, cliente.getId());
+            
+            statement.setBoolean(1,false);
+            statement.setInt(2, cliente.getId());
             statement.executeUpdate();
 
             statement.close();
@@ -132,7 +133,7 @@ public class ClienteDAO {
 
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, cliente.getEmail());
-            userStatement.setString(2, encoder.encode(cliente.getSenha()));
+            userStatement.setString(2, cliente.getSenha());
             userStatement.setString(3, cliente.getCpf());
             userStatement.setString(4, cliente.getNome());
             userStatement.setString(5, cliente.getTelefone());

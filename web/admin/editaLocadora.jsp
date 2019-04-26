@@ -9,11 +9,13 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastrar uma nova locadora</title>
+        <title>Edita locadora</title>
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
-                <form action="novaLocadora">
+
+                <form action="atualizaLocadora">
+
             <fieldset>
 
                 <!-- Form Name -->

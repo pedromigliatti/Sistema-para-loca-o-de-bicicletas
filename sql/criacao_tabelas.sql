@@ -8,7 +8,7 @@ nome varchar(50) not null,
 telefone varchar(11) not null,
 sexo varchar(1) not null,
 nascimento date not null,
-ativo smallint not null,
+ativo boolean not null,
 CONSTRAINT Cliente_PK PRIMARY KEY (id)
 );
 
@@ -20,7 +20,7 @@ senha varchar(100) not null,
 cnpj varchar(11) not null unique,
 nome varchar(50) not null,
 cidade varchar(50) not null,
-ativo smallint not null,
+ativo boolean not null,
 CONSTRAINT Locadora_PK PRIMARY KEY (id)
 );
 

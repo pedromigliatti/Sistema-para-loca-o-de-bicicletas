@@ -13,12 +13,7 @@
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
-              <c:if test="${cliente != null}">
-                <form action="atualizaLocadora">
-            </c:if>
-            <c:if test="${cliente == null}">
                 <form action="novaLocadora">
-            </c:if>
             <fieldset>
 
                 <!-- Form Name -->

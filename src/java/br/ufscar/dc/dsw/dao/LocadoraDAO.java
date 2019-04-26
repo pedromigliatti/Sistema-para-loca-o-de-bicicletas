@@ -50,7 +50,7 @@ public class LocadoraDAO {
 
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, locadora.getEmail());
-            userStatement.setString(2, encoder.encode(locadora.getSenha()));
+            userStatement.setString(2, locadora.getSenha());
             userStatement.setString(3, locadora.getCnpj());
             userStatement.setString(4, locadora.getNome());
             userStatement.setString(5, locadora.getCidade());
@@ -61,7 +61,7 @@ public class LocadoraDAO {
 
             roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, locadora.getEmail());
-            roleStatement.setString(2, "ROLE_LOCADORA");
+            roleStatement.setString(2, "ROLE_USER");
             roleStatement.execute();
             
             conn.close();
@@ -74,7 +74,7 @@ public class LocadoraDAO {
 
         List<Locadora> listaLocadoras = new ArrayList<>();
 
-        String sql = "SELECT * FROM Locadora";
+        String sql = "SELECT * FROM Locadora WHERE ativo=1";
 
         try {
             Connection conn = this.getConnection();
@@ -103,7 +103,7 @@ public class LocadoraDAO {
     }
 
     public void delete(Locadora locadora) {
-        String sql = "DELETE FROM Locadora where id = ?";
+        String sql = "UPDATE Locadora SET ativo=0 WHERE id = ?";
 
         try {
             Connection conn = this.getConnection();
@@ -129,7 +129,7 @@ public class LocadoraDAO {
 
             userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, locadora.getEmail());
-            userStatement.setString(2, encoder.encode(locadora.getSenha()));
+            userStatement.setString(2, locadora.getSenha());
             userStatement.setString(3, locadora.getCnpj());
             userStatement.setString(4, locadora.getNome());
             userStatement.setString(5, locadora.getCidade());

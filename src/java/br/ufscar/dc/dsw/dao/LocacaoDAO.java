@@ -48,7 +48,7 @@ public class LocacaoDAO {
             userStatement = conn.prepareStatement(userSql);
             userStatement.setDate(1, (Date) locacao.getDataHora());
             userStatement.setString(3, locacao.getCnpjLocadora());
-            userStatement.setString(4, locacao.getCpfCliente());
+            userStatement.setString(2, locacao.getCpfCliente());
             userStatement.execute();
             
             conn.close();

@@ -21,12 +21,8 @@
                 </tr>
                 <c:forEach items="${requestScope.listaLocacoes}" var="locacao">
                     <tr>
-                        <td>${locacao.data}</td> 
-                        <td>${locacao.cnpj_locadora}</td>
-<!--                        
-                        <td><a href="deletaLocadora?id=<c:out value='${locadora.id}' />">Deletar</a></td>
-                        <td><a href="editaLocadora?id=<c:out value='${locadora.id}' />">Modificar</a></td>-->
-                        
+                        <td>${locacao.dataHora}</td> 
+                        <td>${locacao.cnpjLocadora}</td>                      
                     </tr>
                 </c:forEach>
             </table>
