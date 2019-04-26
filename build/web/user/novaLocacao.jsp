@@ -27,7 +27,16 @@
 
                     </div>
                 </div>
-                        
+                
+              <!-- Text input
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="data">Horário</label>  
+                    <div class="col-md-4">
+                        <input id="nascimento" name="horário" type="time" placeholder="horário" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+                        -->
                 <!-- Text input-->
                 <div class="form-group" hidden>
                     <label class="col-md-4 control-label" for="cpf">CPF Cliente</label>  
@@ -57,6 +66,8 @@
             </fieldset>
         </form>
             </sec:authorize>
+                         <br>
+            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp">Voltar</a>
 
     </body>
 </html>

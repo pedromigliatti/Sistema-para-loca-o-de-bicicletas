@@ -86,7 +86,8 @@
             </fieldset>
         </form>
             </sec:authorize>
-
+<br>
+            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verLocadora">Voltar</a>
     </body>
 </html>
 

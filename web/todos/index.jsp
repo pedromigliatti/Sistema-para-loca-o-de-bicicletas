@@ -12,11 +12,11 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
-        <a href="adminIndex.jsp">Entrar</a>
+        <h1>Bem Vindo!</h1>
+        <a href="adminIndex.jsp">Fazer Login</a>
         <br>
-        <a href="todos/listaLocadorasCidade.jsp">Listar Locadoras por Cidade</a>
+        <a href="todos/buscaEstado.jsp">Locadoras por Cidade</a>
         <br>
-        <a href="todos/verLocadorasTodos">Listar Locadoras</a>
+        <a href="todos/verLocadorasTodos">Lista de todas as Locadoras</a>
     </body>
 </html>

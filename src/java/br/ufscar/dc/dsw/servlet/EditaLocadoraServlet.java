@@ -31,7 +31,7 @@ public class EditaLocadoraServlet extends HttpServlet {
             LocadoraDAO dao = new LocadoraDAO(); 
             int id = Integer.parseInt(request.getParameter("id"));
             Locadora locadora = dao.get(id);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("novaLocadora.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("editaLocadora.jsp");
             request.setAttribute("locadora", locadora);
             dispatcher.forward(request, response);
         } catch (Exception e) {

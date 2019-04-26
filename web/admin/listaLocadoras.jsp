@@ -33,5 +33,7 @@
         </c:if>
             <br>
             <a href="novaLocadora.jsp">Criar Nova Locadora</a>
+            <br>
+            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp">Voltar</a>
     </body>
 </html>
