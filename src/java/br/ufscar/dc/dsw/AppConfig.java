@@ -29,6 +29,8 @@ public class AppConfig extends WebSecurityConfigurerAdapter {
         builder.jdbcAuthentication().dataSource(dataSource)
                 .usersByUsernameQuery("select email, senha, ativo"
                         + " from Cliente where email = ?")
+                .usersByUsernameQuery("select email, senha, ativo"
+                        + " from Locadora where email = ?")
                 .authoritiesByUsernameQuery("select email, nome "
                         + "from Papel where email = ?")
                 .passwordEncoder(new BCryptPasswordEncoder());

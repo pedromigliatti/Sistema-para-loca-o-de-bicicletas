@@ -7,6 +7,7 @@ package br.ufscar.dc.dsw.servlet;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.dao.LocacaoDAO;
+import br.ufscar.dc.dsw.dao.LocadoraDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Locacao;
 import java.io.IOException;
@@ -29,13 +30,13 @@ public class VerLocacoesClienteServlet extends HttpServlet {
 
         List<Locacao> todasLocacoes;
         try {
-            ClienteDAO clienteDAO = new ClienteDAO();
-            String cpf = clienteDAO.get(request.getParameter("nome")).getCpf();
+            LocadoraDAO locadoraDAO = new LocadoraDAO();
+            String cnpj = locadoraDAO.get(request.getParameter("nome")).getCnpj();
             LocacaoDAO locacaoDAO = new LocacaoDAO();
             todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
             request.setAttribute("listaLocacoes", todasLocacoes);
-            request.setAttribute("cpf", cpf);
-            request.getRequestDispatcher("listaLocacoesCliente.jsp").forward(request, response);
+            request.setAttribute("cnpj", cnpj);
+            request.getRequestDispatcher("listaLocacoesLocadora.jsp").forward(request, response);
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());

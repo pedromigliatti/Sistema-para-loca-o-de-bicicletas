@@ -172,4 +172,32 @@ public class LocadoraDAO {
         return locadora;
     }
     
+    public Locadora get(String email) {
+        Locadora locadora = null;
+        String sql = "SELECT * FROM Locadora WHERE email = ?";
+
+        try {
+            Connection conn = this.getConnection();
+            PreparedStatement statement = conn.prepareStatement(sql);
+            
+            statement.setString(1, email);
+            ResultSet resultSet = statement.executeQuery();
+            if (resultSet.next()) {
+                String nome = resultSet.getString("nome");
+                int id = resultSet.getInt("id");
+                String cnpj = resultSet.getString("cnpj");
+                String cidade = resultSet.getString("cidade");
+                locadora = new Locadora(id, email, cnpj, nome, cidade);
+ 
+            }
+
+            resultSet.close();
+            statement.close();
+            conn.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return locadora;
+    }
+    
 }
