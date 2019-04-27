@@ -42,9 +42,7 @@
         <div align="center">
         <a  class="myButton" href="adminIndex.jsp">Cadastros</a>
         <br>
-        <br>
-        <a class="myButton" href="todos/buscaEstado.jsp">Locadoras por Cidade</a>
-        <br>
+      
         <br>
         <a class="myButton" href="todos/verLocadorasTodos">Lista de todas as Locadoras</a>
         </div>

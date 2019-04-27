@@ -1,0 +1,11 @@
+**Projeto Sistema de locação de bicicletas
+**Integrantes:Danilo Prado de Oliveira- 619442
+	Pedro Henrique Migliatti 619744
+	Theodósio Banevícius - 619825
+**Link do github:https://github.com/pedromigliatti/Sistema-para-locacao-de-bicicletas/
+
+
+SGBD utilizado: JavaDB
+nome do banco:Sistema-de-locacao-de-bicicletas
+usuário e senha de acesso: root e root
+  
