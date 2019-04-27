@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Context path="/Sistema-para-locacao-de-bicicletas">
+  <ResourceLink global="jdbc/Sistema-para-locacao-de-bicicletas" name="jdbc/Sistema-para-locacao-de-bicicletas" type="javax.sql.DataSource"/>
+</Context>
