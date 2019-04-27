@@ -40,11 +40,15 @@ public class NovaLocadoraServlet extends HttpServlet {
             locadora.setCidade( request.getParameter("cidade"));
             
             locadoraDAO.insert(locadora);
-            request.setAttribute("mensagem", "Lcadora adicionada!");
+            request.setAttribute("mensagem", "Locadora adicionada!");
             response.sendRedirect("verLocadora");
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("mensagem", e.getLocalizedMessage());
+            if(e.getLocalizedMessage().contains("A instrução foi interrompida, porque iria gerar um valor duplicado da chave em uma restrição de chave primária ou de unicidade identificada por 'SQL190416092129610' definida em 'CLIENTE'.")) {
+                request.setAttribute("mensagem", "O cnpj da locadora que você está tentando cadastrar já foi utilziado");
+            } else {
+                request.setAttribute("mensagem", e.getLocalizedMessage());
+            }
             request.getRequestDispatcher("erro.jsp").forward(request, response);
         }
     }

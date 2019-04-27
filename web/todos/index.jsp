@@ -13,7 +13,7 @@
     </head>
     <body>
         <h1>Bem Vindo!</h1>
-        <a href="adminIndex.jsp">Fazer Login</a>
+        <a href="adminIndex.jsp">Cadastros</a>
         <br>
         <a href="todos/buscaEstado.jsp">Locadoras por Cidade</a>
         <br>

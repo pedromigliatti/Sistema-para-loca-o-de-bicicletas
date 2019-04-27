@@ -70,8 +70,7 @@ a{
          <h2>Erro 404 - &nbspOps Aconteceu um erro!</h2>
         
         <p>
-      - Parece que alguma coisa deu errado ou a página não existe mais.<br /><br />
-	  - Este site está temporariamente impossibilitado de atender seu pedido, uma vez que excedeu o limite de recursos. Por favor, volte em breve.
+            Descrição: ${mensagem}
         </p>
         
         <br />
