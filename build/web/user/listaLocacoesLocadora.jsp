@@ -17,12 +17,12 @@
             <table>
                 <tr>
                     <th>Data</th>
-                    <th>CNPJ da Locadora</th>
+                    <th>CPF do Cliente</th>
                 </tr>
                 <c:forEach items="${requestScope.listaLocacoes}" var="locacao">
                     <tr>
                         <td>${locacao.dataHora}</td> 
-                        <td>${locacao.cnpjLocadora}</td>                      
+                        <td>${locacao.cpfCliente}</td>                      
                     </tr>
                 </c:forEach>
             </table>

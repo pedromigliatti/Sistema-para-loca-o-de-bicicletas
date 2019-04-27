@@ -20,7 +20,7 @@ public class NomeServlet extends HttpServlet {
             throws ServletException, IOException {
         
         response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
+//        response.setCharacterEncoding("UTF-8");
 
         String nome = request.getParameter("term");
 

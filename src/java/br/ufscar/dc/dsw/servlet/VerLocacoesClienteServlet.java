@@ -10,6 +10,7 @@ import br.ufscar.dc.dsw.dao.LocacaoDAO;
 import br.ufscar.dc.dsw.dao.LocadoraDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Locacao;
+import br.ufscar.dc.dsw.pojo.Locadora;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -30,13 +31,31 @@ public class VerLocacoesClienteServlet extends HttpServlet {
 
         List<Locacao> todasLocacoes;
         try {
+            ClienteDAO clienteDAO = new ClienteDAO();
+            String cpf =null;
+            Cliente cliente = clienteDAO.get(request.getParameter("nome"));
+            if(cliente != null)
+                cpf= cliente.getCpf();
+            
             LocadoraDAO locadoraDAO = new LocadoraDAO();
-            String cnpj = locadoraDAO.get(request.getParameter("nome")).getCnpj();
-            LocacaoDAO locacaoDAO = new LocacaoDAO();
-            todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
-            request.setAttribute("listaLocacoes", todasLocacoes);
-            request.setAttribute("cnpj", cnpj);
-            request.getRequestDispatcher("listaLocacoesLocadora.jsp").forward(request, response);
+            String cnpj =null;
+            Locadora locadora = locadoraDAO.get(request.getParameter("nome"));
+            if(locadora != null)
+                cnpj = locadora.getCnpj();
+            
+            if(cpf==null){
+                LocacaoDAO locacaoDAO = new LocacaoDAO();
+                todasLocacoes = locacaoDAO.getAllLocadora(cnpj);
+                request.setAttribute("listaLocacoes", todasLocacoes);
+                request.setAttribute("cnpj", cnpj);
+                request.getRequestDispatcher("listaLocacoesLocadora.jsp").forward(request, response);
+            } else {
+                LocacaoDAO locacaoDAO = new LocacaoDAO();
+                todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
+                request.setAttribute("listaLocacoes", todasLocacoes);
+                request.setAttribute("cpf", cpf);
+                request.getRequestDispatcher("listaLocacoesCliente.jsp").forward(request, response);
+            }
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());

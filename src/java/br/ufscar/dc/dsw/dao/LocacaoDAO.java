@@ -88,29 +88,18 @@ public class LocacaoDAO {
         return listaLocacao;
     }
     
-    public List<Locacao> getAllCliente(String nome) {
+    public List<Locacao> getAllCliente(String cpf) {
         List<Locacao> listaLocacao = new ArrayList<>();
-        
-        String sqlNome = "SELECT * FROM Cliente WHERE email = ?";
 
         String sql = "SELECT * FROM Locacao WHERE cpf_cliente = ?";
 
         try {
-            Connection conn = this.getConnection();
-            PreparedStatement statementNome = conn.prepareStatement(sqlNome);
-
-            statementNome = conn.prepareStatement(sqlNome);
-            statementNome.setString(1, nome);
-            
-            ResultSet resultSet = statementNome.executeQuery();
+           Connection conn = this.getConnection();
             
             PreparedStatement statement = conn.prepareStatement(sql);
-            String cpf = null;
-            while (resultSet.next()) {
-                cpf = resultSet.getString("cpf");
-            }
             statement = conn.prepareStatement(sql);
             statement.setString(1, cpf);
+            ResultSet resultSet = statement.executeQuery();
             resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
@@ -141,7 +130,7 @@ public class LocacaoDAO {
             PreparedStatement statement = conn.prepareStatement(sql);
 
             statement.setString(1, cnpj);
-            ResultSet resultSet = statement.executeQuery(sql);
+            ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()) {
                 int id = resultSet.getInt("id");
                 String cpf = resultSet.getString("cpf_cliente");

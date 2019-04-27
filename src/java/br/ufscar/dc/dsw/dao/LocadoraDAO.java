@@ -41,6 +41,8 @@ public class LocadoraDAO {
         String userSql = "Insert into Locadora (email, senha, cnpj, nome, cidade, ativo) "
                     + "values (?,?,?,?,?,?)";
         
+        String sql = "Insert into Usuario (email, senha, ativo) values (?,?,?)";
+        
         String roleSql = "Insert into Papel (email, nome)"
                     + "values (?,?)";
 
@@ -56,6 +58,13 @@ public class LocadoraDAO {
             userStatement.setString(5, locadora.getCidade());
             userStatement.setBoolean(6, true);
             userStatement.execute();
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1,locadora.getEmail());
+            statement.setString(2,locadora.getSenha());
+            statement.setBoolean(3,true);
+            statement.execute();
+            
             
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
 
@@ -104,6 +113,7 @@ public class LocadoraDAO {
 
     public void delete(Locadora locadora) {
         String sql = "UPDATE Locadora SET ativo=0 WHERE id = ?";
+        String userSql = "UPDATE Usuario SET ativo=0 WHERE email=?";
 
         try {
             Connection conn = this.getConnection();
@@ -111,6 +121,9 @@ public class LocadoraDAO {
 
             statement.setInt(1, locadora.getId());
             statement.executeUpdate();
+            
+            statement = conn.prepareStatement(userSql);
+            statement.setString(1,locadora.getEmail());
 
             statement.close();
             conn.close();

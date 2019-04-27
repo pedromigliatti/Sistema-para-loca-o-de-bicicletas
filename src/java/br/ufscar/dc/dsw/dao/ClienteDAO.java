@@ -41,6 +41,8 @@ public class ClienteDAO {
         String userSql = "Insert into Cliente (email, senha, cpf, nome, telefone, sexo, nascimento, ativo) "
                     + "values (?,?,?,?,?,?,?,?)";
         
+        String sql = "Insert into Usuario (email, senha, ativo) values (?,?,?)";
+        
         String roleSql = "Insert into Papel (email, nome)"
                     + "values (?,?)";
 
@@ -58,6 +60,12 @@ public class ClienteDAO {
             userStatement.setDate(7, (Date) cliente.getNascimento());
             userStatement.setBoolean(8, true);
             userStatement.execute();
+            
+            PreparedStatement statement = conn.prepareStatement(sql);
+            statement.setString(1,cliente.getEmail());
+            statement.setString(2,cliente.getSenha());
+            statement.setBoolean(3,true);
+            statement.execute();
             
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
 
@@ -107,6 +115,7 @@ public class ClienteDAO {
 
     public void delete(Cliente cliente) {
         String sql = "UPDATE Cliente SET ativo=? WHERE id = ?";
+        String userSql = "UPDATE Usuario SET ativo=0 WHERE email=?";
 
         try {
             Connection conn = this.getConnection();
@@ -114,6 +123,10 @@ public class ClienteDAO {
             
             statement.setBoolean(1,false);
             statement.setInt(2, cliente.getId());
+            statement.executeUpdate();
+            
+            statement = conn.prepareStatement(userSql);
+            statement.setString(1,cliente.getEmail());
             statement.executeUpdate();
 
             statement.close();
