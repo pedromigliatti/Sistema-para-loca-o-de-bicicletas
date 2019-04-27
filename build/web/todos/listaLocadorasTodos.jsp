@@ -18,14 +18,17 @@
                 <tr>
                     <th>Email</th>
                     <th>Nome</th>
+                    <th>Cidade</th>
                 </tr>
                 <c:forEach items="${requestScope.listaLocadoras}" var="locadora">
                     <tr>
                         <td>${locadora.email}</td> 
                         <td>${locadora.nome}</td>
+                        <td>${locadora.cidade}</td>
                     </tr>
                 </c:forEach>
             </table>
         </c:if>
+            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">Voltar</a>
     </body>
 </html>
