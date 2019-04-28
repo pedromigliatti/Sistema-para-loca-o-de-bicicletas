@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <head>
 <title>Ops - Erro na aplicação</title>
 <meta charset="UTF-8">
@@ -60,24 +62,25 @@ a{
     font-weight: normal;
 }
 </style>
-<title>Ops - Erro na aplicÃ£o</title>
+<title><f:message key="500.title"/></title>
 <script src="consoleErros/console.js"></script>
 </head>
 <body marginwidth="0" marginheight="0" onload="console500()">
     <div id="block_error">
         <div>
-         <h2>Erro 500 - &nbspOps Aconteceu um erro!</h2>
+         <h2><f:message key="500.label"/></h2>
         
         <p>
-      - Erro interno de servidor.<br /><br />
-	  - Verifique o seu servidor e banco de dados .
-          -Tente novamente mais tarde
+      <f:message key="500.text1.label"/><br /><br />
+	  <f:message key="500.text2.label"/> 
+          <f:message key="500.text3.label"/>
         </p>
         
         <br />
-        <p>Ir para <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">página incial.</a> </p>
+        <p><f:message key="500.text4.label"/> <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/"><f:message key="500.text5.label"/></a> </p>
         </div>
     </div>
 </body>
 
 </html>
+</f:bundle>

@@ -5,11 +5,13 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <!DOCTYPE html>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Cadastrar uma nova locadora</title>
+        <title><f:message key="new.rental.store.title"/></title>
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
@@ -17,11 +19,11 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Nova Locadora</legend>
+                <legend><f:message key="new.rental.store.legend.label"/></legend>
                 
                 <c:if test="${locadora != null}">
                     <div class="form-group">
-                    <label class="col-md-4 control-label" for="id">ID</label>  
+                    <label class="col-md-4 control-label" for="id"><f:message key="new.rental.store.info1.label"/></label>  
                     <div class="col-md-4">
                         <input id="id" name="id" type="hidden" placeholder="ID" class="form-control input-md" required="" value="${locadora.id}">
                     </div>
@@ -30,7 +32,7 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="nome">Nome</label>  
+                    <label class="col-md-4 control-label" for="nome"><f:message key="new.rental.store.info2.label"/></label>  
                     <div class="col-md-4">
                         <input id="nome" name="nome" type="text" placeholder="Nome" class="form-control input-md" required=""value="${locadora.nome}">
 
@@ -39,7 +41,7 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="email">Email</label>  
+                    <label class="col-md-4 control-label" for="email"><f:message key="new.rental.store.info3.label"/></label>  
                     <div class="col-md-4">
                         <input id="email" name="email" type="text" placeholder="Email" class="form-control input-md" required="" value="${locadora.email}">
 
@@ -48,7 +50,7 @@
 
                 <!-- Password input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="senha">Senha</label>
+                    <label class="col-md-4 control-label" for="senha"><f:message key="new.rental.store.info4.label"/></label>
                     <div class="col-md-4">
                         <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="" value="${locadora.senha}">
 
@@ -57,7 +59,7 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="cnpj">CNPJ</label>  
+                    <label class="col-md-4 control-label" for="cnpj"><f:message key="new.rental.store.info5.label"/></label>  
                     <div class="col-md-4">
                         <input id="cnpj" name="cnpj" type="text" placeholder="CNPJ" class="form-control input-md" required="" value="${locadora.cnpj}">
 
@@ -67,7 +69,7 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="cidade">Cidade</label>  
+                    <label class="col-md-4 control-label" for="cidade"><f:message key="new.rental.store.info6.label"/></label>  
                     <div class="col-md-4">
                         <input id="cidade" name="cidade" type="text" placeholder="Cidade" class="form-control input-md" value="${locadora.cidade}">
 
@@ -79,7 +81,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="submit"></label>
                     <div class="col-md-4">
-                        <button id="submit" type="submit" name="submit" class="btn btn-primary">Salvar</button>
+                        <button id="submit" type="submit" name="submit" class="btn btn-primary"><f:message key="new.rental.store.option1.label"/></button>
                     </div>
                 </div>
 
@@ -87,7 +89,7 @@
         </form>
             </sec:authorize>
 <br>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verLocadora">Voltar</a>
+            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verLocadora">><f:message key="new.rental.store.option2.label"/></a>
     </body>
 </html>
-
+</f:bundle>

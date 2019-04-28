@@ -1,4 +1,6 @@
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <head>
 <title>Ops - Erro na aplicação</title>
 <meta charset="UTF-8">
@@ -60,23 +62,24 @@ a{
     font-weight: normal;
 }
 </style>
-<title>Ops - Erro na aplição</title>
+<title><f:message key="404.title"/></title>
  <script src="consoleErros/console.js"></script>
  
 </head>
 <body marginwidth="0" marginheight="0" onload="console404()">
     <div id="block_error">
         <div>
-         <h2>Erro 404 - &nbspOps Aconteceu um erro!</h2>
+         <h2><f:message key="404.label"/></h2>
         
         <p>
-            Descrição: ${mensagem}
+            <f:message key="403.text1.label"/> ${mensagem}
         </p>
         
         <br />
-        <p>Ir para <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">página incial.</a> </p>
+        <p><f:message key="403.text2.label"/><a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/"><f:message key="403.text3.label"/></a> </p>
         </div>
     </div>
 </body>
 
 </html>
+</f:bundle>
