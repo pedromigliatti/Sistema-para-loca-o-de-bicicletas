@@ -1,4 +1,6 @@
     <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+    <%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <html>
     <style>
         .myButton {
@@ -40,26 +42,27 @@
 }
     </style>
     <body>
-        <h2 align="center">Bemvindo
+        <h2 align="center"><f:message key="admin.index.welcome.label"/>
             <%=request.getUserPrincipal().getName().toString()%>
         </h2>
 
         <div align="center">
         <sec:authorize access="hasRole('ADMIN')">
 
-            <a class="myButton" href="admin/verCliente">Ver Cliente</a>
+            <a class="myButton" href="admin/verCliente"><f:message key="admin.index.option1.label"/></a>
             <br>
             <br>
-            <a class="myButton" href="admin/verLocadora">Ver Locadoras</a>
+            <a class="myButton" href="admin/verLocadora"><f:message key="admin.index.option2.label"/></a>
         </sec:authorize>
 
         <sec:authorize access="hasRole('USER')">
 
-            <a class="myButton" href="user/verLocacoesCliente?nome=<%=request.getUserPrincipal().getName()%>">Locações</a>
+            <a class="myButton" href="user/verLocacoesCliente?nome=<%=request.getUserPrincipal().getName()%>"><f:message key="admin.index.option1.labe3"/></a>
         </sec:authorize>
             <br>
             <br>
-            <a class="myButtonDelete" href="logout">Logout</a>
+            <a class="myButtonDelete" href="logout"><f:message key="admin.index.option4.label"/></a>
         </div>
     </body>
 </html>
+</f:bundle>

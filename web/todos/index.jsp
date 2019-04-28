@@ -6,6 +6,8 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <html>
     <style>
         .myButton {
@@ -34,17 +36,18 @@
     </style>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title><f:message key="page.title"/></title>
     </head>
     <body>
-        <h1 align="center">Bem Vindo!</h1>
+        <h1 align="center"><f:message key="welcome.label"/></h1>
         <br>
         <div align="center">
-        <a  class="myButton" href="adminIndex.jsp">Cadastros</a>
+        <a  class="myButton" href="adminIndex.jsp"><f:message key="welcome.label"/></a>
         <br>
       
         <br>
-        <a class="myButton" href="todos/verLocadorasTodos">Lista de todas as Locadoras</a>
+        <a class="myButton" href="todos/verLocadorasTodos"><f:message key="rental.store.label"/></a>
         </div>
     </body>
 </html>
+</f:bundle>
