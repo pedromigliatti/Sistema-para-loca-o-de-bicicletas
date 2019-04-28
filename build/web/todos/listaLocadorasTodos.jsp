@@ -18,9 +18,9 @@
         <c:if test="${!empty requestScope.listaLocadoras}">
             <table>
                 <tr>
-                    <th><f:message key="all.rental.store.test2.label"/></th>
-                    <th><f:message key="all.rental.store.test13.label"/></th>
-                    <th><f:message key="all.rental.store.test4.label"/></th>
+                    <th><f:message key="all.rental.store.test2.email.label"/></th>
+                    <th><f:message key="all.rental.store.test2.name.label"/></th>
+                    <th><f:message key="all.rental.store.test3.name.label"/></th>
                 </tr>
                 <c:forEach items="${requestScope.listaLocadoras}" var="locadora">
                     <tr>
