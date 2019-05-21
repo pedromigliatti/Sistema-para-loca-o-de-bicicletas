@@ -51,7 +51,8 @@ public class VerLocacoesClienteServlet extends HttpServlet {
                 request.getRequestDispatcher("listaLocacoesLocadora.jsp").forward(request, response);
             } else {
                 LocacaoDAO locacaoDAO = new LocacaoDAO();
-                todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
+                String nome = request.getParameter("nome");
+                todasLocacoes = locacaoDAO.getAllCliente(cpf);
                 request.setAttribute("listaLocacoes", todasLocacoes);
                 request.setAttribute("cpf", cpf);
                 request.getRequestDispatcher("listaLocacoesCliente.jsp").forward(request, response);
