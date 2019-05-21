@@ -117,7 +117,15 @@
         </form>
             </sec:authorize>
 <br>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verCliente"><f:message key="new.client.option1.label"/></a>
-    </body>
+           <!-- <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verCliente"><f:message key="new.client.option1.label"/></a>-->
+    </body></body> <a class="myButtonEdit"  onclick="goBack()"><f:message key="new.client.option1.label"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
 </html>
 </f:bundle>

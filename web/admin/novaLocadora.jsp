@@ -89,7 +89,15 @@
         </form>
             </sec:authorize>
 <br>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verLocadora">><f:message key="new.rental.store.option2.label"/></a>
-    </body>
+          <!--  <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verLocadora">><f:message key="new.rental.store.option2.label"/></a>-->
+    </body> <a class="myButtonEdit"  onclick="goBack()"><f:message key="new.rental.store.option2.label"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
 </html>
 </f:bundle>

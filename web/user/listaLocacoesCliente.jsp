@@ -33,7 +33,16 @@
             <a href="adicionaLocacao?cpf=<c:out value='${cpf}'/>"><f:message key="show.renting.client.option1.label"/></a>
             
              <br>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp"><f:message key="show.renting.client.option2.label"/></a>
+           <!-- <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp"><f:message key="show.renting.client.option2.label"/></a>-->
+            </body></body> <a class="myButtonEdit"  onclick="goBack()"><f:message key="show.renting.client.option2.label"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
     </body>
 </html>
 </f:bundle>
