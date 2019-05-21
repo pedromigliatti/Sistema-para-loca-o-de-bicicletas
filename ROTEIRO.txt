@@ -1,11 +1,40 @@
 **Projeto Sistema de locação de bicicletas
-**Integrantes:Danilo Prado de Oliveira- 619442
-	Pedro Henrique Migliatti 619744
-	Theodósio Banevícius - 619825
-**Link do github:https://github.com/pedromigliatti/Sistema-para-locacao-de-bicicletas/
+
+**Integrantes:
+	-Danilo Prado de Oliveira- 619442
+	-Pedro Henrique Migliatti 619744
+	-Theodósio Banevícius - 619825
+
+**Link do github:
+	-https://github.com/pedromigliatti/Sistema-para-locacao-de-bicicletas/
+
+**SGBD utilizado: 
+	-JavaDB
+
+**Nome do banco(é necessário criar novamente o Banco de Dados para a primeira execução):
+	-Sistema-de-locacao-de-bicicletas
+
+**Usuário e senha de acesso ao Banco de Dados: 
+	-Usuário: root  Senha: root
+
+**Método para criação de tabelas do Banco de Dados:
+	-Entre na janela "arquivos" do projeto
+	-Selecione o arquivo "criacao-tabelas.sql" na pasta sql
+	-execute o arquivo
+	-Selecione o Banco de Dados "Sistema-de-locacao-de-bicicletas" do JavaDB 
+
+**Método para popular o Banco de Dados
+	-Entre na aba Pacotes de Códigos-fonte
+	-Entre na pasta br.ufscar.dc.dsw
+	-execute o arquivo CriaUsuarios.java
+
+**Usuário e senha defaults:
+	-Usuário:admin@admin Senha:admin
+	-Usuário:user@user Senha:user	
+	
 
 
-SGBD utilizado: JavaDB
-nome do banco:Sistema-de-locacao-de-bicicletas
-usuário e senha de acesso: root e root
-  
+
+
+		
+

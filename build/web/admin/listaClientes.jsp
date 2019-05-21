@@ -1,6 +1,8 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <html>
     <head>
         <style>
@@ -43,23 +45,23 @@
 }
             </style>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Todos Usuários</title>
+        <title><f:message key="show.client.title"/></title>
         <link rel="stylesheet" type="text/css" href="estilo.css" />
     </head>
     <body>
-        <h1>Clientes</h1>
+        <h1><f:message key="show.client.label"/></h1>
         <hr>
         <c:if test="${empty requestScope.listaClientes}">
-            Não há clientes!
+            <f:message key="show.client.test.label"/>
         </c:if>
         <c:if test="${!empty requestScope.listaClientes}">
             <table border="1px">
                 <tr>
-                    <th>Usuário</th>
-                    <th>Nome</th>
-                    <th>CPF</th>
-                    <th>Telefone</th>
-                    <th>Data de Nascimento</th>
+                    <th><f:message key="show.client.info1.label"/></th>
+                    <th><f:message key="show.client.info2.label"/></th>
+                    <th><f:message key="show.client.info3.label"/></th>
+                    <th><f:message key="show.client.info4.label"/></th>
+                    <th><f:message key="show.client.info5.label"/></th>
                 </tr>
                 <c:forEach items="${requestScope.listaClientes}" var="cliente">
                     <tr>
@@ -69,16 +71,17 @@
                         <td>${cliente.telefone}</td>
                         <td>${cliente.nascimento}</td>
                         
-                        <td><a class="myButtonDelete" href="deletaCliente?id=<c:out value='${cliente.id}' />">Deletar</a></td>
-                        <td><a class="myButtonEdit" href="editaCliente?id=<c:out value='${cliente.id}' />">Editar</a></td>
+                        <td><a class="myButtonDelete" href="deletaCliente?id=<c:out value='${cliente.id}' />"><f:message key="show.client.option1.label"/></a></td>
+                        <td><a class="myButtonEdit" href="editaCliente?id=<c:out value='${cliente.id}' />"><f:message key="show.client.option2.label"/></a></td>
                     </tr>
                 </c:forEach>
             </table>
         </c:if>
             <br>
-            <a class="myButtonEdit" href="adicionaCliente">Criar Novo Cliente</a>
+            <a class="myButtonEdit" href="adicionaCliente"><f:message key="show.client.option3.label"/></a>
             <br>
             <br>
-            <a class="myButtonEdit" href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp">Voltar</a>
+            <a class="myButtonEdit" href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp"><f:message key="show.client.option4.label"/></a>
     </body>
 </html>
+</f:bundle>

@@ -6,10 +6,12 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Nova Locacao</title>
+        <title><f:message key="new.renting.title"/></title>
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
@@ -17,11 +19,11 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Nova Locacao</legend>
+                <legend><f:message key="new.renting.legend.label"/></legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="data">Data</label>  
+                    <label class="col-md-4 control-label" for="data"><f:message key="new.renting.info1.label"/></label>  
                     <div class="col-md-4">
                         <input id="nascimento" name="data" type="date" placeholder="data" class="form-control input-md" required="">
 
@@ -39,7 +41,7 @@
                         -->
                 <!-- Text input-->
                 <div class="form-group" hidden>
-                    <label class="col-md-4 control-label" for="cpf">CPF Cliente</label>  
+                    <label class="col-md-4 control-label" for="cpf"><f:message key="new.renting.info2.label"/></label>  
                     <div class="col-md-4">
                         <input id="email" name="cpf" type="text" placeholder="CPF Cliente" class="form-control input-md" required=""value="${cpf}">
 
@@ -48,7 +50,7 @@
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="cnpj">CNPJ Locadora</label>  
+                    <label class="col-md-4 control-label" for="cnpj"><f:message key="new.renting.info3.label"/></label>  
                     <div class="col-md-4">
                         <input id="email" name="cnpj" type="text" placeholder="CNPJ Locadora" class="form-control input-md" required="">
 
@@ -59,7 +61,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="submit"></label>
                     <div class="col-md-4">
-                        <button id="submit" type="submit" name="submit" class="btn btn-primary">Salvar</button>
+                        <button id="submit" type="submit" name="submit" class="btn btn-primary"><f:message key="new.renting.option1.label"/></button>
                     </div>
                 </div>
 
@@ -67,7 +69,8 @@
         </form>
             </sec:authorize>
                          <br>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp">Voltar</a>
+            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp"><f:message key="new.renting.option2.label"/></a>
 
     </body>
 </html>
+</f:bundle>

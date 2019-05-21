@@ -1,24 +1,26 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="f" %>
+<f:bundle basename="i18n.mensagens">
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Todas Locadoras</title>
+        <title><f:message key="all.rental.store.title"/></title>
         <link rel="stylesheet" type="text/css" href="estilo.css" />
     </head>
     <body>
-        <h1>Locadoras</h1>
+        <h1><f:message key="all.rental.store.main.label"/></h1>
         <hr>
         <c:if test="${empty requestScope.listaLocadoras}">
-            Não há locadoras!
+            <f:message key="all.rental.store.test1.label"/>
         </c:if>
         <c:if test="${!empty requestScope.listaLocadoras}">
             <table>
                 <tr>
-                    <th>Email</th>
-                    <th>Nome</th>
-                    <th>Cidade</th>
+                    <th><f:message key="all.rental.store.test2.email.label"/></th>
+                    <th><f:message key="all.rental.store.test2.name.label"/></th>
+                    <th><f:message key="all.rental.store.test3.name.label"/></th>
                 </tr>
                 <c:forEach items="${requestScope.listaLocadoras}" var="locadora">
                     <tr>
@@ -29,6 +31,16 @@
                 </c:forEach>
             </table>
         </c:if>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">Voltar</a>
+           <!-- <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">Voltar</a>-->
+             </body></body> <a class="myButtonEdit"  onclick="goBack()"><f:message key="new.client.option1.label"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
     </body>
 </html>
+</f:bundle>
