@@ -57,7 +57,7 @@
 
         <sec:authorize access="hasRole('USER')">
 
-            <a class="myButton" href="user/verLocacoesCliente?nome=<%=request.getUserPrincipal().getName()%>"><f:message key="admin.index.option1.labe3"/></a>
+            <a class="myButton" href="user/verLocacoesCliente?nome=<%=request.getUserPrincipal().getName()%>"><f:message key="admin.index.option3.label"/></a>
         </sec:authorize>
             <br>
             <br>
