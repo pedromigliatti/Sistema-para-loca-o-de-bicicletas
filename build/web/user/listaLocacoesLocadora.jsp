@@ -24,7 +24,7 @@
                 <c:forEach items="${requestScope.listaLocacoes}" var="locacao">
                     <tr>
                         <td>${locacao.dataHora}</td> 
-                        <td>${locacao.cpfCliente}</td>                      
+                        <td>${locacao.cpfclienteId.getCpf()}</td>                      
                     </tr>
                 </c:forEach>
             </table>
