@@ -1,6 +1,8 @@
 package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.pojo.Cliente;
+import br.ufscar.dc.dsw.pojo.Papel;
+import br.ufscar.dc.dsw.pojo.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -129,9 +131,15 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         EntityManager em = this.getEntityManager();
         Query q = em.createNamedQuery("Cliente.findByNome", Cliente.class);
         q.setParameter("nome", nome);
-        List<Cliente> cliente = q.getResultList();
+        List<Cliente> clientes = q.getResultList();
         em.close();
-        return cliente.get(0); 
+        Cliente cliente;
+        if(clientes.isEmpty()){
+            cliente = null;
+        } else{ 
+            cliente = clientes.get(0);
+        }
+        return cliente; 
     }
 
 
@@ -143,6 +151,22 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         em.persist(cliente);
         tx.commit();
         em.close();
+        
+        Papel papel = new Papel();
+        papel.setEmail(cliente.getEmail());
+        papel.setNome("ROLE_USER");
+        
+        PapelDAO papelDAO = new PapelDAO();
+        papelDAO.save(papel);
+        
+        Usuario usuario = new Usuario();
+        usuario.setAtivo(Boolean.TRUE);
+        usuario.setEmail(cliente.getEmail());
+        usuario.setSenha(cliente.getSenha());
+        
+        UsuarioDAO usuarioDAO = new UsuarioDAO();
+        usuarioDAO.save(usuario);
+        
     }
     
     public Cliente getCpf(String cpf){

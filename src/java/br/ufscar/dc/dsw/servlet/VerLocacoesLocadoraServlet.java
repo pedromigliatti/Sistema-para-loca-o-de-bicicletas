@@ -31,8 +31,8 @@ public class VerLocacoesLocadoraServlet extends HttpServlet {
             LocadoraDAO locadoraDAO = new LocadoraDAO();
             String cnpj = locadoraDAO.get(request.getParameter("nome")).getCnpj();
             LocacaoDAO locacaoDAO = new LocacaoDAO();
-//            todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
-//            request.setAttribute("listaLocacoes", todasLocacoes);
+            todasLocacoes = locacaoDAO.getAllCliente(request.getParameter("nome"));
+            request.setAttribute("listaLocacoes", todasLocacoes);
             request.setAttribute("cnpj", cnpj);
             request.getRequestDispatcher("listaLocacoesLocadora.jsp").forward(request, response);
         } catch (Exception e) {

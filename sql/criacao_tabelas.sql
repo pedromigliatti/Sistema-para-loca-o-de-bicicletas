@@ -46,4 +46,5 @@ create table Usuario (
 id integer not null generated always as identity (start with 1, increment by 1),
 email varchar(50) not null,
 ativo boolean not null,
-senha varchar(100) not null);
+senha varchar(100) not null),
+CONSTRAINT Usuario_PK PRIMARY KEY (id);

@@ -5,6 +5,8 @@
  */
 package br.ufscar.dc.dsw;
 
+import br.ufscar.dc.dsw.pojo.Usuario;
+import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.sql.DataSource;
@@ -28,7 +30,9 @@ public class CriaUsuarios {
                     + "values (?,?)";
 
             // Criando Usuario admin com papel ROLE_ADMIN
-//            
+            
+            
+            
             PreparedStatement userStatement = conn.prepareStatement(userSql);
             userStatement.setString(1, "admin@admin");
             userStatement.setString(2, encoder.encode("admin"));
@@ -39,6 +43,14 @@ public class CriaUsuarios {
             userStatement.setDate(7, java.sql.Date.valueOf("2013-09-04"));
             userStatement.setBoolean(8, true);
             userStatement.execute();
+            
+            Usuario usuario = new Usuario();
+            usuario.setEmail("admin@admin");
+            usuario.setSenha(encoder.encode("admin"));
+            usuario.setAtivo(Boolean.TRUE);
+            
+            UsuarioDAO usuarioDAO = new UsuarioDAO();
+            usuarioDAO.save(usuario);
 
             PreparedStatement roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, "admin@admin");

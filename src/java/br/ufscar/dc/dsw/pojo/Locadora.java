@@ -29,7 +29,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Locadora.findAll", query = "SELECT l FROM Locadora l"),
-    @NamedQuery(name = "Locadora.findByNome", query = "SELECT l FROM Locadora l WHERE l.email = :email"),
+    @NamedQuery(name = "Locadora.findByEmail", query = "SELECT l FROM Locadora l WHERE l.email = :email"),
     @NamedQuery(name = "Locadora.findByCnpj", query = "SELECT l FROM Locadora l WHERE l.cnpj = :cnpj")})
 public class Locadora implements Serializable {
     private static final long serialVersionUID = 1L;
