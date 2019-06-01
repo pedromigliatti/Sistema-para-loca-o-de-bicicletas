@@ -27,6 +27,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author pedro
  */
 public class ClienteDAO extends GenericDAO<Cliente> {
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
     
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //    public ClienteDAO() {
@@ -164,7 +165,6 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         usuario.setEmail(cliente.getEmail());
         usuario.setSenha(cliente.getSenha());
         
-        UsuarioDAO usuarioDAO = new UsuarioDAO();
         usuarioDAO.save(usuario);
         
     }

@@ -27,13 +27,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 @WebServlet(name="Novo Cliente Servlet", urlPatterns = {"/admin/novoCliente"})
 public class NovoClienteServlet extends HttpServlet {
+    
+    ClienteDAO clienteDAO = new ClienteDAO();
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
 
         try {
-            ClienteDAO clienteDAO = new ClienteDAO();
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             
             Cliente cliente = new Cliente();

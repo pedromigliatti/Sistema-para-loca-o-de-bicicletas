@@ -68,6 +68,13 @@ public class CriaUsuarios {
             userStatement.setDate(7, java.sql.Date.valueOf("2013-09-04"));
             userStatement.setBoolean(8, true);
             userStatement.execute();
+            
+            Usuario usuario2 = new Usuario();
+            usuario2.setEmail("user@user");
+            usuario2.setSenha(encoder.encode("user"));
+            usuario2.setAtivo(Boolean.TRUE);
+            
+            usuarioDAO.save(usuario2);
 
             roleStatement = conn.prepareStatement(roleSql);
             roleStatement.setString(1, "user@user");
