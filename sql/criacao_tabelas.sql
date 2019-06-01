@@ -8,7 +8,7 @@ nome varchar(50) not null,
 telefone varchar(11) not null,
 sexo varchar(1) not null,
 nascimento date not null,
-ativo boolean not null,
+ativo integer not null,
 CONSTRAINT Cliente_PK PRIMARY KEY (id)
 );
 
@@ -20,7 +20,7 @@ senha varchar(100) not null,
 cnpj varchar(11) not null unique,
 nome varchar(50) not null,
 cidade varchar(50) not null,
-ativo boolean not null,
+ativo integer not null,
 CONSTRAINT Locadora_PK PRIMARY KEY (id)
 );
 
@@ -45,5 +45,5 @@ constraint Papel_PK PRIMARY KEY (id)
 create table Usuario (
 id integer not null generated always as identity (start with 1, increment by 1),
 email varchar(50) not null,
-ativo boolean not null,
+ativo integer not null,
 senha varchar(100) not null);
