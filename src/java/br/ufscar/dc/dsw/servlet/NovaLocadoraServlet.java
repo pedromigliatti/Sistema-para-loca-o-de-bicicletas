@@ -39,7 +39,7 @@ public class NovaLocadoraServlet extends HttpServlet {
             locadora.setNome( request.getParameter("nome"));
             locadora.setCidade( request.getParameter("cidade"));
             
-            locadoraDAO.insert(locadora);
+            locadoraDAO.save(locadora);
             request.setAttribute("mensagem", "Locadora adicionada!");
             response.sendRedirect("verLocadora");
         } catch (Exception e) {

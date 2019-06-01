@@ -7,6 +7,8 @@ package br.ufscar.dc.dsw.dao;
 
 import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Locadora;
+import br.ufscar.dc.dsw.pojo.Papel;
+import br.ufscar.dc.dsw.pojo.Usuario;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.DriverManager;
@@ -26,61 +28,63 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * @author pedro
  */
 public class LocadoraDAO extends GenericDAO<Locadora> {
+    
+    UsuarioDAO usuarioDAO = new UsuarioDAO();
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-    public LocadoraDAO() {
-        try {
-            Class.forName("org.apache.derby.jdbc.ClientDriver");
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
-    
-    protected Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:derby://localhost:1527/Sistema-de-locacao-de-bicicletas", "root", "root");
-    }
-    
-    public void insert(Locadora locadora) {
-
-        String userSql = "Insert into Locadora (email, senha, cnpj, nome, cidade, ativo) "
-                    + "values (?,?,?,?,?,?)";
-        
-        String sql = "Insert into Usuario (email, senha, ativo) values (?,?,?)";
-        
-        String roleSql = "Insert into Papel (email, nome)"
-                    + "values (?,?)";
-
-        try {
-            Connection conn = this.getConnection();
-             PreparedStatement userStatement = conn.prepareStatement(userSql);
-
-            userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, locadora.getEmail());
-            userStatement.setString(2, locadora.getSenha());
-            userStatement.setString(3, locadora.getCnpj());
-            userStatement.setString(4, locadora.getNome());
-            userStatement.setString(5, locadora.getCidade());
-            userStatement.setBoolean(6, true);
-            userStatement.execute();
-            
-            PreparedStatement statement = conn.prepareStatement(sql);
-            statement.setString(1,locadora.getEmail());
-            statement.setString(2,locadora.getSenha());
-            statement.setBoolean(3,true);
-            statement.execute();
-            
-            
-            PreparedStatement roleStatement = conn.prepareStatement(roleSql);
-
-            roleStatement = conn.prepareStatement(roleSql);
-            roleStatement.setString(1, locadora.getEmail());
-            roleStatement.setString(2, "ROLE_USER");
-            roleStatement.execute();
-            
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-    }
+//    public LocadoraDAO() {
+//        try {
+//            Class.forName("org.apache.derby.jdbc.ClientDriver");
+//        } catch (ClassNotFoundException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
+//    
+//    protected Connection getConnection() throws SQLException {
+//        return DriverManager.getConnection("jdbc:derby://localhost:1527/Sistema-de-locacao-de-bicicletas", "root", "root");
+//    }
+//    
+//    public void insert(Locadora locadora) {
+//
+//        String userSql = "Insert into Locadora (email, senha, cnpj, nome, cidade, ativo) "
+//                    + "values (?,?,?,?,?,?)";
+//        
+//        String sql = "Insert into Usuario (email, senha, ativo) values (?,?,?)";
+//        
+//        String roleSql = "Insert into Papel (email, nome)"
+//                    + "values (?,?)";
+//
+//        try {
+//            Connection conn = this.getConnection();
+//             PreparedStatement userStatement = conn.prepareStatement(userSql);
+//
+//            userStatement = conn.prepareStatement(userSql);
+//            userStatement.setString(1, locadora.getEmail());
+//            userStatement.setString(2, locadora.getSenha());
+//            userStatement.setString(3, locadora.getCnpj());
+//            userStatement.setString(4, locadora.getNome());
+//            userStatement.setString(5, locadora.getCidade());
+//            userStatement.setBoolean(6, true);
+//            userStatement.execute();
+//            
+//            PreparedStatement statement = conn.prepareStatement(sql);
+//            statement.setString(1,locadora.getEmail());
+//            statement.setString(2,locadora.getSenha());
+//            statement.setBoolean(3,true);
+//            statement.execute();
+//            
+//            
+//            PreparedStatement roleStatement = conn.prepareStatement(roleSql);
+//
+//            roleStatement = conn.prepareStatement(roleSql);
+//            roleStatement.setString(1, locadora.getEmail());
+//            roleStatement.setString(2, "ROLE_USER");
+//            roleStatement.execute();
+//            
+//            conn.close();
+//        } catch (SQLException e) {
+//            throw new RuntimeException(e);
+//        }
+//    }
 
     @Override
     public List<Locadora> getAll() {
@@ -139,20 +143,40 @@ public class LocadoraDAO extends GenericDAO<Locadora> {
         EntityManager em = this.getEntityManager();
         Query q = em.createNamedQuery("Locadora.findByCnpj", Locadora.class);
         q.setParameter("cnpj", cnpj);
-        List<Locadora> locadora = q.getResultList();
+        List<Locadora> locadoras = q.getResultList();
         em.close();
-        return locadora.get(0);
+        Locadora locadora;
+        if(locadoras.isEmpty()){
+            locadora = null;
+        } else{ 
+            locadora = locadoras.get(0);
+        }
+        return locadora;
     }
 
 
     @Override
-    void save(Locadora locadora) {
+    public void save(Locadora locadora) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         em.persist(locadora);
         tx.commit();
         em.close();
+        
+        Papel papel = new Papel();
+        papel.setEmail(locadora.getEmail());
+        papel.setNome("ROLE_USER");
+        
+        PapelDAO papelDAO = new PapelDAO();
+        papelDAO.save(papel);
+        
+        Usuario usuario = new Usuario();
+        usuario.setAtivo(Boolean.TRUE);
+        usuario.setEmail(locadora.getEmail());
+        usuario.setSenha(locadora.getSenha());
+        
+        usuarioDAO.save(usuario);
     }
 
     

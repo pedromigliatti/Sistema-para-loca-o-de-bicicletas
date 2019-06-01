@@ -28,6 +28,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  */
 public class LocacaoDAO extends GenericDAO<Locacao> {
     ClienteDAO clienteDAO = new ClienteDAO();
+    LocadoraDAO locadoraDAO = new LocadoraDAO();
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 //    public LocacaoDAO() {
 //        try {
@@ -84,7 +85,7 @@ public class LocacaoDAO extends GenericDAO<Locacao> {
     public List<Locacao> getAllLocadora(String cnpj) {
         EntityManager em = this.getEntityManager();
         Query q = em.createNamedQuery("Locacao.findByLocadora", Locacao.class);
-        q.setParameter("locadora", cnpj);
+        q.setParameter("locadora", locadoraDAO.getCnpj(cnpj));
         List<Locacao> locacao = q.getResultList();
         em.close();
         return locacao;
