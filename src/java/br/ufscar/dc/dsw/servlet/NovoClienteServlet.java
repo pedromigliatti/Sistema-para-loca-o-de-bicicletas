@@ -45,7 +45,7 @@ public class NovoClienteServlet extends HttpServlet {
             cliente.setSexo( request.getParameter("sexo"));
             cliente.setNascimento( java.sql.Date.valueOf(request.getParameter("nascimento")));
             
-            clienteDAO.insert(cliente);
+            clienteDAO.save(cliente);
             request.setAttribute("mensagem", "Cliente adicionado!");
             response.sendRedirect("verCliente");
         } catch (Exception e) {

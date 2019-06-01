@@ -34,7 +34,9 @@ import javax.xml.bind.annotation.XmlTransient;
 @Table(name = "CLIENTE")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c")})
+    @NamedQuery(name = "Cliente.findAll", query = "SELECT c FROM Cliente c"),
+    @NamedQuery(name = "Cliente.findByNome", query = "SELECT c FROM Cliente c WHERE c.email = :nome"),
+    @NamedQuery(name = "Cliente.findByCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf")})
 public class Cliente implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -67,8 +69,6 @@ public class Cliente implements Serializable {
     @Basic(optional = false)
     @Column(name = "ATIVO")
     private short ativo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cpfCliente")
-    private Collection<Locacao> locacaoCollection;
 
     public Cliente() {
     }
@@ -185,14 +185,6 @@ public class Cliente implements Serializable {
         this.ativo = ativo;
     }
 
-    @XmlTransient
-    public Collection<Locacao> getLocacaoCollection() {
-        return locacaoCollection;
-    }
-
-    public void setLocacaoCollection(Collection<Locacao> locacaoCollection) {
-        this.locacaoCollection = locacaoCollection;
-    }
 
     @Override
     public int hashCode() {

@@ -16,13 +16,16 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Query;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 /**
  *
  * @author pedro
  */
-public class LocadoraDAO {
+public class LocadoraDAO extends GenericDAO<Locadora> {
     BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
     public LocadoraDAO() {
         try {
@@ -79,138 +82,72 @@ public class LocadoraDAO {
         }
     }
 
+    @Override
     public List<Locadora> getAll() {
+        EntityManager em = this.getEntityManager();
+        Query q = em.createNamedQuery("Locadora.findAll");
+        List<Locadora> listaLocadoras = q.getResultList();
+        em.close();
 
-        List<Locadora> listaLocadoras = new ArrayList<>();
-
-        String sql = "SELECT * FROM Locadora WHERE ativo=1";
-
-        try {
-            Connection conn = this.getConnection();
-            Statement statement = conn.createStatement();
-
-            ResultSet resultSet = statement.executeQuery(sql);
-            while (resultSet.next()) {
-                int id = resultSet.getInt("id");
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");
-                String cnpj = resultSet.getString("cnpj");
-                String cidade = resultSet.getString("cidade");
-               
-
-                Locadora locadora = new Locadora(id, email, cnpj, nome, cidade);
-                listaLocadoras.add(locadora);
-            }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         return listaLocadoras;
     }
-
+    
+    @Override
     public void delete(Locadora locadora) {
-        String sql = "UPDATE Locadora SET ativo=0 WHERE id = ?";
-        String userSql = "UPDATE Usuario SET ativo=0 WHERE email=?";
-
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-
-            statement.setInt(1, locadora.getId());
-            statement.executeUpdate();
-            
-            statement = conn.prepareStatement(userSql);
-            statement.setString(1,locadora.getEmail());
-
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        EntityManager em = this.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        locadora = em.getReference(Locadora.class, locadora.getId());
+        tx.begin();
+        em.remove(locadora);
+        tx.commit();
     }
 
-    public void update(Locadora locadora, int id) {
-        String userSql = "UPDATE Locadora SET email=?, senha=?, cnpj=?, nome=?, cidade=?, ativo=?";
-        userSql += " WHERE id = ?";
-
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement userStatement = conn.prepareStatement(userSql);
-
-            userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, locadora.getEmail());
-            userStatement.setString(2, locadora.getSenha());
-            userStatement.setString(3, locadora.getCnpj());
-            userStatement.setString(4, locadora.getNome());
-            userStatement.setString(5, locadora.getCidade());
-            userStatement.setBoolean(6, true);
-            userStatement.setInt(7, id);
-            userStatement.execute();
-
-            userStatement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public void update(Locadora locadora) {
+        EntityManager em = this.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.merge(locadora);
+        tx.commit();
+        em.close();
     }
 
-    public Locadora get(int id) {
-        Locadora locadora = null;
-        String sql = "SELECT * FROM Locadora WHERE id = ?";
-
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            
-            statement.setInt(1, id);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                String email = resultSet.getString("email");
-                String cnpj = resultSet.getString("cnpj");
-                String cidade = resultSet.getString("cidade");
-                locadora = new Locadora(id, email, cnpj, nome, cidade);
- 
-            }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    @Override
+    public Locadora get(Long id) {
+        EntityManager em = this.getEntityManager();
+        Locadora locadora = em.find(Locadora.class, id);
+        em.close();
         return locadora;
     }
     
     public Locadora get(String email) {
-        Locadora locadora = null;
-        String sql = "SELECT * FROM Locadora WHERE email = ?";
-
-        try {
-            Connection conn = this.getConnection();
-            PreparedStatement statement = conn.prepareStatement(sql);
-            
-            statement.setString(1, email);
-            ResultSet resultSet = statement.executeQuery();
-            if (resultSet.next()) {
-                String nome = resultSet.getString("nome");
-                int id = resultSet.getInt("id");
-                String cnpj = resultSet.getString("cnpj");
-                String cidade = resultSet.getString("cidade");
-                locadora = new Locadora(id, email, cnpj, nome, cidade);
- 
-            }
-
-            resultSet.close();
-            statement.close();
-            conn.close();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return locadora;
+        EntityManager em = this.getEntityManager();
+        Query q = em.createNamedQuery("Locadora.findByEmail", Locadora.class);
+        q.setParameter("email", email);
+        List<Locadora> locadora = q.getResultList();
+        em.close();
+        return locadora.get(0);
     }
+    
+    public Locadora getCnpj(String cnpj) {
+        EntityManager em = this.getEntityManager();
+        Query q = em.createNamedQuery("Locadora.findByCnpj", Locadora.class);
+        q.setParameter("cnpj", cnpj);
+        List<Locadora> locadora = q.getResultList();
+        em.close();
+        return locadora.get(0);
+    }
+
+
+    @Override
+    void save(Locadora locadora) {
+        EntityManager em = this.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        tx.begin();
+        em.persist(locadora);
+        tx.commit();
+        em.close();
+    }
+
     
 }

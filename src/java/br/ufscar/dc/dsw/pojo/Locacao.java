@@ -31,7 +31,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Table(name = "LOCACAO")
 @XmlRootElement
 @NamedQueries({
-    @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l")})
+    @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l"),
+    @NamedQuery(name = "Locacao.findByCliente", query = "SELECT l FROM Locacao l WHERE l.cpfCliente = :cliente"),
+    @NamedQuery(name = "Locacao.findByLocadora", query = "SELECT l FROM Locacao l WHERE l.cnpjLocadora = :locadora")})
 public class Locacao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
@@ -43,12 +45,10 @@ public class Locacao implements Serializable {
     @Column(name = "DATA_HORA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora;
-    @JoinColumn(name = "CPF_CLIENTE", referencedColumnName = "CPF")
-    @ManyToOne(optional = false)
-    private String cpfCliente;
-    @JoinColumn(name = "CNPJ_LOCADORA", referencedColumnName = "CNPJ")
-    @ManyToOne(optional = false)
-    private String cnpjLocadora;
+    @ManyToOne
+    private Cliente cpfCliente;
+    @ManyToOne
+    private Locadora cnpjLocadora;
 
     public Locacao() {
     }
@@ -62,7 +62,7 @@ public class Locacao implements Serializable {
         this.dataHora = dataHora;
     }
     
-    public Locacao(Integer id, Date dataHora, String cpf, String cnpj) {
+    public Locacao(Integer id, Date dataHora, Cliente cpf, Locadora cnpj) {
         this.id = id;
         this.dataHora = dataHora;
         this.cpfCliente = cpf;
@@ -85,19 +85,19 @@ public class Locacao implements Serializable {
         this.dataHora = dataHora;
     }
 
-    public String getCpfCliente() {
+    public Cliente getCpfCliente() {
         return cpfCliente;
     }
 
-    public void setCpfCliente(String cpfCliente) {
+    public void setCpfCliente(Cliente cpfCliente) {
         this.cpfCliente = cpfCliente;
     }
 
-    public String getCnpjLocadora() {
+    public Locadora getCnpjLocadora() {
         return cnpjLocadora;
     }
 
-    public void setCnpjLocadora(String cnpjLocadora) {
+    public void setCnpjLocadora(Locadora cnpjLocadora) {
         this.cnpjLocadora = cnpjLocadora;
     }
 

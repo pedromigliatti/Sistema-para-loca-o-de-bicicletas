@@ -28,7 +28,7 @@ public class EditaClienteServlet extends HttpServlet {
         try {
             ClienteDAO dao = new ClienteDAO(); 
             int id = Integer.parseInt(request.getParameter("id"));
-            Cliente cliente = dao.get(id);
+            Cliente cliente = dao.get(Long.valueOf(id));
             RequestDispatcher dispatcher = request.getRequestDispatcher("editaCliente.jsp");
             request.setAttribute("cliente", cliente);
             dispatcher.forward(request, response);

@@ -43,7 +43,7 @@ public class AtualizaLocadoraServlet extends HttpServlet {
             locadora.setCidade(request.getParameter("cidade"));
            
             int id = Integer.parseInt(request.getParameter("id"));
-            locadoraDAO.update(locadora,id);
+            locadoraDAO.update(locadora);
             
             request.setAttribute("mensagem", "Locadora atualizada!");
             response.sendRedirect("verLocadora");

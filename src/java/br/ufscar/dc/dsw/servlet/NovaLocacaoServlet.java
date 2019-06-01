@@ -7,9 +7,12 @@ package br.ufscar.dc.dsw.servlet;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
 import br.ufscar.dc.dsw.dao.LocacaoDAO;
+import br.ufscar.dc.dsw.dao.LocadoraDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Locacao;
+import br.ufscar.dc.dsw.pojo.Locadora;
 import java.io.IOException;
+import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,13 +33,15 @@ public class NovaLocacaoServlet extends HttpServlet {
 
         try {
             LocacaoDAO locacaoDAO = new LocacaoDAO();
+            ClienteDAO clienteDAO = new ClienteDAO();
+            LocadoraDAO locadoraDAO = new LocadoraDAO();
             
             Locacao locacao = new Locacao();
-            locacao.setCpfCliente(request.getParameter("cpf"));
-            locacao.setCnpjLocadora(request.getParameter("cnpj"));
+            locacao.setCpfCliente(clienteDAO.get(request.getParameter("cpf")));
+            locacao.setCnpjLocadora(locadoraDAO.get(request.getParameter("cnpj")));
             locacao.setDataHora( java.sql.Date.valueOf(request.getParameter("data")));
             
-            locacaoDAO.insert(locacao);
+            locacaoDAO.save(locacao);
             request.setAttribute("mensagem", "Locacao adicionado!");
             response.sendRedirect("verLocacoesCliente");
         } catch (Exception e) {

@@ -45,15 +45,15 @@ public class VerLocacoesClienteServlet extends HttpServlet {
             
             if(cpf==null){
                 LocacaoDAO locacaoDAO = new LocacaoDAO();
-                todasLocacoes = locacaoDAO.getAllLocadora(cnpj);
-                request.setAttribute("listaLocacoes", todasLocacoes);
+//                todasLocacoes = locacaoDAO.getAllLocadora(cnpj);
+//                request.setAttribute("listaLocacoes", todasLocacoes);
                 request.setAttribute("cnpj", cnpj);
                 request.getRequestDispatcher("listaLocacoesLocadora.jsp").forward(request, response);
             } else {
                 LocacaoDAO locacaoDAO = new LocacaoDAO();
                 String nome = request.getParameter("nome");
-                todasLocacoes = locacaoDAO.getAllCliente(cpf);
-                request.setAttribute("listaLocacoes", todasLocacoes);
+//                todasLocacoes = locacaoDAO.getAllCliente(cpf);
+//                request.setAttribute("listaLocacoes", todasLocacoes);
                 request.setAttribute("cpf", cpf);
                 request.getRequestDispatcher("listaLocacoesCliente.jsp").forward(request, response);
             }

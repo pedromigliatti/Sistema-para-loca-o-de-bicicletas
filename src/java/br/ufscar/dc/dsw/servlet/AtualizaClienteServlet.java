@@ -44,7 +44,7 @@ public class AtualizaClienteServlet extends HttpServlet {
             cliente.setNascimento(java.sql.Date.valueOf(request.getParameter("nascimento")));
            
             int id = Integer.parseInt(request.getParameter("id"));
-            clienteDAO.update(cliente,id);
+            clienteDAO.update(cliente);
             
             request.setAttribute("mensagem", "Cliente atualizado!");
             response.sendRedirect("verCliente");
