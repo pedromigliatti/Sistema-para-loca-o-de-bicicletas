@@ -37,8 +37,8 @@ public class NovaLocacaoServlet extends HttpServlet {
             LocadoraDAO locadoraDAO = new LocadoraDAO();
             
             Locacao locacao = new Locacao();
-            locacao.setCpfCliente(clienteDAO.get(request.getParameter("cpf")));
-            locacao.setCnpjLocadora(locadoraDAO.get(request.getParameter("cnpj")));
+            locacao.setCpfclienteId(clienteDAO.getCpf(request.getParameter("cpf")));
+            locacao.setCnpjlocadoraId(locadoraDAO.getCnpj(request.getParameter("cnpj")));
             locacao.setDataHora( java.sql.Date.valueOf(request.getParameter("data")));
             
             locacaoDAO.save(locacao);

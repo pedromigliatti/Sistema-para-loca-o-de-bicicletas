@@ -5,7 +5,6 @@
  */
 package br.ufscar.dc.dsw.pojo;
 
-import br.ufscar.dc.dsw.pojo.Locadora;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Basic;
@@ -21,6 +20,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -32,41 +32,33 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "Locacao.findAll", query = "SELECT l FROM Locacao l"),
-    @NamedQuery(name = "Locacao.findByCliente", query = "SELECT l FROM Locacao l WHERE l.cpfCliente = :cliente"),
-    @NamedQuery(name = "Locacao.findByLocadora", query = "SELECT l FROM Locacao l WHERE l.cnpjLocadora = :locadora")})
+    @NamedQuery(name = "Locacao.findById", query = "SELECT l FROM Locacao l WHERE l.id = :id"),
+    @NamedQuery(name = "Locacao.findByDataHora", query = "SELECT l FROM Locacao l WHERE l.dataHora = :dataHora"),
+    @NamedQuery(name = "Locacao.findByCliente", query = "SELECT l FROM Locacao l WHERE l.cpfclienteId = :cliente"),
+    @NamedQuery(name = "Locacao.findByLocadora", query = "SELECT l FROM Locacao l WHERE l.cnpjlocadoraId = :locadora")})
 public class Locacao implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
+    @NotNull
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ID")
     private Integer id;
-    @Basic(optional = false)
     @Column(name = "DATA_HORA")
     @Temporal(TemporalType.TIMESTAMP)
     private Date dataHora;
+    @JoinColumn(name = "CPFCLIENTE_ID", referencedColumnName = "ID")
     @ManyToOne
-    private Cliente cpfCliente;
+    private Cliente cpfclienteId;
+    @JoinColumn(name = "CNPJLOCADORA_ID", referencedColumnName = "ID")
     @ManyToOne
-    private Locadora cnpjLocadora;
+    private Locadora cnpjlocadoraId;
 
     public Locacao() {
     }
 
     public Locacao(Integer id) {
         this.id = id;
-    }
-
-    public Locacao(Integer id, Date dataHora) {
-        this.id = id;
-        this.dataHora = dataHora;
-    }
-    
-    public Locacao(Integer id, Date dataHora, Cliente cpf, Locadora cnpj) {
-        this.id = id;
-        this.dataHora = dataHora;
-        this.cpfCliente = cpf;
-        this.cnpjLocadora = cnpj;
     }
 
     public Integer getId() {
@@ -85,20 +77,20 @@ public class Locacao implements Serializable {
         this.dataHora = dataHora;
     }
 
-    public Cliente getCpfCliente() {
-        return cpfCliente;
+    public Cliente getCpfclienteId() {
+        return cpfclienteId;
     }
 
-    public void setCpfCliente(Cliente cpfCliente) {
-        this.cpfCliente = cpfCliente;
+    public void setCpfclienteId(Cliente cpfclienteId) {
+        this.cpfclienteId = cpfclienteId;
     }
 
-    public Locadora getCnpjLocadora() {
-        return cnpjLocadora;
+    public Locadora getCnpjlocadoraId() {
+        return cnpjlocadoraId;
     }
 
-    public void setCnpjLocadora(Locadora cnpjLocadora) {
-        this.cnpjLocadora = cnpjLocadora;
+    public void setCnpjlocadoraId(Locadora cnpjlocadoraId) {
+        this.cnpjlocadoraId = cnpjlocadoraId;
     }
 
     @Override
@@ -123,7 +115,7 @@ public class Locacao implements Serializable {
 
     @Override
     public String toString() {
-        return "br.ufscar.dc.dsw.model.Locacao[ id=" + id + " ]";
+        return "br.ufscar.dc.dsw.pojo.Locacao[ id=" + id + " ]";
     }
     
 }

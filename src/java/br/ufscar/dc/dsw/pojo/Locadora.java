@@ -32,6 +32,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Locadora.findByEmail", query = "SELECT l FROM Locadora l WHERE l.email = :email"),
     @NamedQuery(name = "Locadora.findByCnpj", query = "SELECT l FROM Locadora l WHERE l.cnpj = :cnpj")})
 public class Locadora implements Serializable {
+    @Column(name = "ATIVO")
+    private boolean ativo;
+    @OneToMany(mappedBy = "cnpjlocadoraId")
+    private Collection<Locacao> locacaoCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -53,9 +57,6 @@ public class Locadora implements Serializable {
     @Basic(optional = false)
     @Column(name = "CIDADE")
     private String cidade;
-    @Basic(optional = false)
-    @Column(name = "ATIVO")
-    private boolean ativo;
 
     public Locadora() {
     }
@@ -131,13 +132,6 @@ public class Locadora implements Serializable {
         this.cidade = cidade;
     }
 
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
 
     @Override
     public int hashCode() {
@@ -162,6 +156,23 @@ public class Locadora implements Serializable {
     @Override
     public String toString() {
         return "br.ufscar.dc.dsw.model.Locadora[ id=" + id + " ]";
+    }
+
+    public boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    @XmlTransient
+    public Collection<Locacao> getLocacaoCollection() {
+        return locacaoCollection;
+    }
+
+    public void setLocacaoCollection(Collection<Locacao> locacaoCollection) {
+        this.locacaoCollection = locacaoCollection;
     }
     
 }

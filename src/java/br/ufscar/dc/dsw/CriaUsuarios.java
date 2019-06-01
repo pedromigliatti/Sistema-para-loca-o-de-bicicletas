@@ -25,28 +25,21 @@ public class CriaUsuarios {
             BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
             DataSource ds = JDBCUtil.getDataSource();
 
-            Connection conn = ds.getConnection();
-
-            String userSql = "Insert into Cliente (email, senha, cpf, nome, telefone, sexo, nascimento, ativo) "
-                    + "values (?,?,?,?,?,?,?,?)";
-
-            String roleSql = "Insert into Papel (email, nome)"
-                    + "values (?,?)";
 
             // Criando Usuario admin com papel ROLE_ADMIN
             
             
-            Cliente cliente = new Cliente();
-            cliente.setEmail("admin@admin");
-            cliente.setSenha(encoder.encode("admin"));
-            cliente.setCpf("11111111155");
-            cliente.setNome("Berenice");
-            cliente.setTelefone("999999999");
-            cliente.setSexo("f");
-            cliente.setNascimento(java.sql.Date.valueOf("2013-09-04"));
-            cliente.setAtivo(Boolean.TRUE);
+//            Cliente cliente = new Cliente();
+//            cliente.setEmail("admin@admin");
+//            cliente.setSenha(encoder.encode("admin"));
+//            cliente.setCpf("11111111155");
+//            cliente.setNome("Berenice");
+//            cliente.setTelefone("999999999");
+//            cliente.setSexo("f");
+//            cliente.setNascimento(java.sql.Date.valueOf("2013-09-04"));
+//            cliente.setAtivo(Boolean.TRUE);
             ClienteDAO clienteDAO = new ClienteDAO();
-            clienteDAO.save(cliente);
+//            clienteDAO.save(cliente);
             
             Usuario usuario = new Usuario();
             usuario.setEmail("admin@admin");
@@ -74,6 +67,8 @@ public class CriaUsuarios {
             cliente2.setSexo("f");
             cliente2.setNascimento(java.sql.Date.valueOf("2013-09-04"));
             cliente2.setAtivo(Boolean.TRUE);
+            
+            clienteDAO.save(cliente2);
             
             Usuario usuario2 = new Usuario();
             usuario2.setEmail("user@user");

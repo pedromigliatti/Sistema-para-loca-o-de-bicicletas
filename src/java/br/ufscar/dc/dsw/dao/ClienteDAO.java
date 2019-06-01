@@ -133,13 +133,14 @@ public class ClienteDAO extends GenericDAO<Cliente> {
         Query q = em.createNamedQuery("Cliente.findByNome", Cliente.class);
         q.setParameter("nome", nome);
         List<Cliente> clientes = q.getResultList();
-        em.close();
+        
         Cliente cliente;
         if(clientes.isEmpty()){
             cliente = null;
         } else{ 
-            cliente = clientes.get(0);
+            cliente = (Cliente) clientes.get(q.getFirstResult());
         }
+        em.close();
         return cliente; 
     }
 

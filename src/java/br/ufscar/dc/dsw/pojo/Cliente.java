@@ -38,6 +38,10 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "Cliente.findByNome", query = "SELECT c FROM Cliente c WHERE c.email = :nome"),
     @NamedQuery(name = "Cliente.findByCpf", query = "SELECT c FROM Cliente c WHERE c.cpf = :cpf")})
 public class Cliente implements Serializable {
+    @Column(name = "ATIVO")
+    private boolean ativo;
+    @OneToMany(mappedBy = "cpfclienteId")
+    private Collection<Locacao> locacaoCollection;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -66,9 +70,6 @@ public class Cliente implements Serializable {
     @Column(name = "NASCIMENTO")
     @Temporal(TemporalType.DATE)
     private Date nascimento;
-    @Basic(optional = false)
-    @Column(name = "ATIVO")
-    private boolean ativo;
 
     public Cliente() {
     }
@@ -177,13 +178,6 @@ public class Cliente implements Serializable {
         this.nascimento = nascimento;
     }
 
-    public boolean getAtivo() {
-        return ativo;
-    }
-
-    public void setAtivo(boolean ativo) {
-        this.ativo = ativo;
-    }
 
 
     @Override
@@ -213,6 +207,23 @@ public class Cliente implements Serializable {
 
     List<String> validar() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    public boolean getAtivo() {
+        return ativo;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
+    }
+
+    @XmlTransient
+    public Collection<Locacao> getLocacaoCollection() {
+        return locacaoCollection;
+    }
+
+    public void setLocacaoCollection(Collection<Locacao> locacaoCollection) {
+        this.locacaoCollection = locacaoCollection;
     }
     
 }
