@@ -12,11 +12,89 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><f:message key="edit.rental.store.title"/></title>
+         <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				
+		
+		<script type="text/javascript" src="jquery-3.4.1.min.admin.js"></script>
+	
+		<script type="text/javascript" src="jquery.mask.min.admin.js"></script>	
+		<script type="text/javascript">
+		$(document).ready(function(){
+			
+			$("#cnpj").mask("00.000.000/0000-00")
+			
+		})
+		</script>
+                </script>
+                <script language = "Javascript">
+
+function emailcheck(str) {
+
+var at="@"
+var dot="."
+var lat=str.indexOf(at)
+var lstr=str.length
+var ldot=str.indexOf(dot)
+if (str.indexOf(at)==-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(dot)==-1 || str.indexOf(dot)==0 || str.indexOf(dot)==lstr){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(at,(lat+1))!=-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.substring(lat-1,lat)==dot || str.substring(lat+1,lat+2)==dot){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(dot,(lat+2))==-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(" ")!=-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+//("valid E-mail ID")
+//return true 
+}
+
+function ValidateEmail(){
+var emailID=document.frm.email
+
+if ((emailID.value==null)||(emailID.value=="")){
+alert("Por favor insira o seu email")
+emailID.focus()
+return false
+}
+if (emailcheck(emailID.value)==false){
+emailID.value=""
+emailID.focus()
+return false
+}
+return true
+}
+</script>
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
 
-                <form action="atualizaLocadora">
+                <form name="frm" action="atualizaLocadora">
 
             <fieldset>
 
@@ -54,7 +132,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="senha"><f:message key="edit.rental.store.info4.label"/></label>
                     <div class="col-md-4">
-                        <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="" value="${locadora.senha}">
+                        <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="" value="${locadora.senha}" onclick="return ValidateEmail()">
 
                     </div>
                 </div>

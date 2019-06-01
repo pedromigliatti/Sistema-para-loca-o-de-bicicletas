@@ -12,10 +12,90 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title><f:message key="new.client.title"/></title>
+   
+    <meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+				
+		
+		<script type="text/javascript" src="jquery-3.4.1.min.admin.js"></script>
+	
+		<script type="text/javascript" src="jquery.mask.min.admin.js"></script>	
+		<script type="text/javascript">
+		$(document).ready(function(){
+			$("#cpf").mask("000.000.000-00")
+			$("#telefone").mask("(00) 0000-0000")
+			$("#dataNascimento").mask("00/00/0000")
+		})
+		</script>
+                <script language = "Javascript">
+
+function emailcheck(str) {
+
+var at="@"
+var dot="."
+var lat=str.indexOf(at)
+var lstr=str.length
+var ldot=str.indexOf(dot)
+if (str.indexOf(at)==-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(at)==-1 || str.indexOf(at)==0 || str.indexOf(at)==lstr){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(dot)==-1 || str.indexOf(dot)==0 || str.indexOf(dot)==lstr){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(at,(lat+1))!=-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.substring(lat-1,lat)==dot || str.substring(lat+1,lat+2)==dot){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(dot,(lat+2))==-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+
+if (str.indexOf(" ")!=-1){
+alert("Formato inválido de email, Por favor utilize o formato email@email.com")
+return false
+}
+//("valid E-mail ID")
+else
+return true 
+}
+
+function ValidateEmail(){
+var emailID=document.frm.email
+
+if ((emailID.value==null)||(emailID.value=="")){
+alert("Por favor insira o seu email")
+emailID.focus()
+return false
+}
+if (emailcheck(emailID.value)==false){
+emailID.value=""
+emailID.focus()
+return false
+}
+return true
+}
+</script>
+                
     </head>
     <body>
         <sec:authorize access="hasRole('ADMIN')">
-                <form action="novoCliente">
+                <form name="frm" action="novoCliente">
             <fieldset>
 
                 <!-- Form Name -->
@@ -44,7 +124,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="email"><f:message key="new.client.info3.label"/></label>  
                     <div class="col-md-4">
-                        <input id="email" name="email" type="text" placeholder="Email" class="form-control input-md" required=""value="${cliente.email}">
+                        <input id="email" name="email" type="text" placeholder="Email" class="form-control input-md" required=""value="${cliente.email}"   >
 
                     </div>
                 </div>
@@ -53,7 +133,8 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="senha"><f:message key="new.client.info4.label"/></label>
                     <div class="col-md-4">
-                        <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="">
+                        <input id="senha" name="senha" type="password" placeholder="senha" class="form-control input-md" required="" onclick="return ValidateEmail()"  >
+                        <!--onclick="return ValidateEmail()"-->
 
                     </div>
                 </div>
@@ -62,7 +143,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="cpf"><f:message key="new.client.info5.label"/></label>  
                     <div class="col-md-4">
-                        <input id="cpf" name="cpf" type="text" placeholder="CPF" class="form-control input-md" required="" value="${cliente.cpf}">
+                        <input type="text" name="cpf"  id="cpf"  placeholder="CPF" class="form-control input-md" required="" value="${cliente.cpf}">
 
                     </div>
                 </div>
@@ -109,7 +190,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="submit"></label>
                     <div class="col-md-4">
-                        <button id="submit" type="submit" name="submit" class="btn btn-primary"><f:message key="new.client.option1.label"/></button>
+                        <button id="submit" type="submit" name="submit" class="btn btn-primary" ><f:message key="new.client.option1.label"/></button>
                     </div>
                 </div>
 
@@ -117,7 +198,16 @@
         </form>
             </sec:authorize>
 <br>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verCliente"><f:message key="new.client.option1.label"/></a>
-    </body>
+           <!-- <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/admin/verCliente"</a>-->
+     <a class="myButtonEdit"  onclick="goBack()"><f:message key="new.renting.option2.label"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
+</body>
 </html>
 </f:bundle>
