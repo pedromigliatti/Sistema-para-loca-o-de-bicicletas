@@ -55,9 +55,7 @@ public class Locadora implements Serializable {
     private String cidade;
     @Basic(optional = false)
     @Column(name = "ATIVO")
-    private short ativo;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "cnpjLocadora")
-    private Collection<Locacao> locacaoCollection;
+    private boolean ativo;
 
     public Locadora() {
     }
@@ -66,7 +64,7 @@ public class Locadora implements Serializable {
         this.id = id;
     }
 
-    public Locadora(Integer id, String email, String senha, String cnpj, String nome, String cidade, short ativo) {
+    public Locadora(Integer id, String email, String senha, String cnpj, String nome, String cidade, boolean ativo) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -133,21 +131,12 @@ public class Locadora implements Serializable {
         this.cidade = cidade;
     }
 
-    public short getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
-    }
-
-    @XmlTransient
-    public Collection<Locacao> getLocacaoCollection() {
-        return locacaoCollection;
-    }
-
-    public void setLocacaoCollection(Collection<Locacao> locacaoCollection) {
-        this.locacaoCollection = locacaoCollection;
     }
 
     @Override

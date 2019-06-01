@@ -38,7 +38,7 @@ public class PapelDAO extends GenericDAO<Papel> {
     }
 
     @Override
-    void save(Papel t) {
+    public void save(Papel t) {
         EntityManager em = this.getEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();

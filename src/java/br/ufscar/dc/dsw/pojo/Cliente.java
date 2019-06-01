@@ -68,7 +68,7 @@ public class Cliente implements Serializable {
     private Date nascimento;
     @Basic(optional = false)
     @Column(name = "ATIVO")
-    private short ativo;
+    private boolean ativo;
 
     public Cliente() {
     }
@@ -77,7 +77,7 @@ public class Cliente implements Serializable {
         this.id = id;
     }
 
-    public Cliente(Integer id, String email, String senha, String cpf, String nome, String telefone, String sexo, Date nascimento, short ativo) {
+    public Cliente(Integer id, String email, String senha, String cpf, String nome, String telefone, String sexo, Date nascimento, boolean ativo) {
         this.id = id;
         this.email = email;
         this.senha = senha;
@@ -177,11 +177,11 @@ public class Cliente implements Serializable {
         this.nascimento = nascimento;
     }
 
-    public short getAtivo() {
+    public boolean getAtivo() {
         return ativo;
     }
 
-    public void setAtivo(short ativo) {
+    public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
 

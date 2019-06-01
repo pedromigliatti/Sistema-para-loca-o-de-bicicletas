@@ -5,8 +5,12 @@
  */
 package br.ufscar.dc.dsw;
 
+import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.PapelDAO;
 import br.ufscar.dc.dsw.pojo.Usuario;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
+import br.ufscar.dc.dsw.pojo.Cliente;
+import br.ufscar.dc.dsw.pojo.Papel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import javax.sql.DataSource;
@@ -32,17 +36,17 @@ public class CriaUsuarios {
             // Criando Usuario admin com papel ROLE_ADMIN
             
             
-            
-            PreparedStatement userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, "admin@admin");
-            userStatement.setString(2, encoder.encode("admin"));
-            userStatement.setString(3, "11111111155");
-            userStatement.setString(4, "Berenice");
-            userStatement.setString(5, "999999999");
-            userStatement.setString(6, "f");
-            userStatement.setDate(7, java.sql.Date.valueOf("2013-09-04"));
-            userStatement.setBoolean(8, true);
-            userStatement.execute();
+            Cliente cliente = new Cliente();
+            cliente.setEmail("admin@admin");
+            cliente.setSenha(encoder.encode("admin"));
+            cliente.setCpf("11111111155");
+            cliente.setNome("Berenice");
+            cliente.setTelefone("999999999");
+            cliente.setSexo("f");
+            cliente.setNascimento(java.sql.Date.valueOf("2013-09-04"));
+            cliente.setAtivo(Boolean.TRUE);
+            ClienteDAO clienteDAO = new ClienteDAO();
+            clienteDAO.save(cliente);
             
             Usuario usuario = new Usuario();
             usuario.setEmail("admin@admin");
@@ -51,23 +55,25 @@ public class CriaUsuarios {
             
             UsuarioDAO usuarioDAO = new UsuarioDAO();
             usuarioDAO.save(usuario);
+            
+            PapelDAO papelDAO = new PapelDAO();
+            Papel papel = new Papel();
+            
+            papel.setEmail("admin@admin");
+            papel.setNome("ROLE_ADMIN");
 
-            PreparedStatement roleStatement = conn.prepareStatement(roleSql);
-            roleStatement.setString(1, "admin@admin");
-            roleStatement.setString(2, "ROLE_ADMIN");
-            roleStatement.execute();
-
+            papelDAO.save(papel);
             // Criando Usuario user com papel ROLE_USER
-            userStatement = conn.prepareStatement(userSql);
-            userStatement.setString(1, "user@user");
-            userStatement.setString(2, encoder.encode("user"));
-            userStatement.setString(3, "21111111155");
-            userStatement.setString(4, "Berenice");
-            userStatement.setString(5, "999999999");
-            userStatement.setString(6, "f");
-            userStatement.setDate(7, java.sql.Date.valueOf("2013-09-04"));
-            userStatement.setBoolean(8, true);
-            userStatement.execute();
+            
+            Cliente cliente2 = new Cliente();
+            cliente2.setEmail("user@user");
+            cliente2.setSenha(encoder.encode("user"));
+            cliente2.setCpf("21111111155");
+            cliente2.setNome("Berenice");
+            cliente2.setTelefone("999999999");
+            cliente2.setSexo("f");
+            cliente2.setNascimento(java.sql.Date.valueOf("2013-09-04"));
+            cliente2.setAtivo(Boolean.TRUE);
             
             Usuario usuario2 = new Usuario();
             usuario2.setEmail("user@user");
@@ -76,10 +82,11 @@ public class CriaUsuarios {
             
             usuarioDAO.save(usuario2);
 
-            roleStatement = conn.prepareStatement(roleSql);
-            roleStatement.setString(1, "user@user");
-            roleStatement.setString(2, "ROLE_USER");
-            roleStatement.execute();
+            
+            Papel papel2 = new Papel();
+            papel2.setEmail("user@user");
+            papel2.setNome("ROLE_USER");
+            papelDAO.save(papel2);
 
         } catch (Exception e) {
             e.printStackTrace();
