@@ -30,6 +30,7 @@ import javax.xml.bind.annotation.XmlTransient;
 @NamedQueries({
     @NamedQuery(name = "Locadora.findAll", query = "SELECT l FROM Locadora l"),
     @NamedQuery(name = "Locadora.findByEmail", query = "SELECT l FROM Locadora l WHERE l.email = :email"),
+    @NamedQuery(name = "Locadora.findByCidade", query = "SELECT l FROM Locadora l WHERE l.cidade = :cidade"),
     @NamedQuery(name = "Locadora.findByCnpj", query = "SELECT l FROM Locadora l WHERE l.cnpj = :cnpj")})
 public class Locadora implements Serializable {
     @Column(name = "ATIVO")
