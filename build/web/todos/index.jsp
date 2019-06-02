@@ -47,6 +47,10 @@
       
         <br>
         <a class="myButton" href="todos/verLocadorasTodos"><f:message key="rental.store.label"/></a>
+        <br>
+        
+        <br> 
+        <a class="myButton" href="todos/verLocadorasCidade"><f:message key="rental.store.by.city.label"/></a>
         </div>
     </body>
 </html>

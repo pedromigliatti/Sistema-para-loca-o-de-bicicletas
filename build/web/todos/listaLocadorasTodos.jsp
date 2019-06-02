@@ -31,7 +31,16 @@
                 </c:forEach>
             </table>
         </c:if>
-            <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">Voltar</a>
+           <!-- <a href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/">Voltar</a>-->
+             </body></body> <a class="myButtonEdit"  onclick="goBack()"><f:message key="all.rental.store.back"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
     </body>
 </html>
 </f:bundle>
