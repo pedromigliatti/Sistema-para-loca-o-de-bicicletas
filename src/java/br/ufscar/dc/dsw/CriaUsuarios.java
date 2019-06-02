@@ -6,10 +6,12 @@
 package br.ufscar.dc.dsw;
 
 import br.ufscar.dc.dsw.dao.ClienteDAO;
+import br.ufscar.dc.dsw.dao.LocadoraDAO;
 import br.ufscar.dc.dsw.dao.PapelDAO;
 import br.ufscar.dc.dsw.pojo.Usuario;
 import br.ufscar.dc.dsw.dao.UsuarioDAO;
 import br.ufscar.dc.dsw.pojo.Cliente;
+import br.ufscar.dc.dsw.pojo.Locadora;
 import br.ufscar.dc.dsw.pojo.Papel;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -57,6 +59,24 @@ public class CriaUsuarios {
 
             papelDAO.save(papel);
             // Criando Usuario user com papel ROLE_USER
+            
+            Locadora locadora = new Locadora();
+            locadora.setEmail("loc@loc");
+            locadora.setSenha(encoder.encode("user"));
+            locadora.setCidade("Araras");
+            locadora.setNome("loc");
+            locadora.setCnpj("11111111111");
+            locadora.setAtivo(true);
+            
+            LocadoraDAO locadoraDAO = new LocadoraDAO();
+            locadoraDAO.save(locadora);
+
+            Usuario usuario3 = new Usuario();
+            usuario3.setEmail("loc@loc");
+            usuario3.setSenha(encoder.encode("loc"));
+            usuario3.setAtivo(Boolean.TRUE);
+            
+            usuarioDAO.save(usuario3);
             
             Cliente cliente2 = new Cliente();
             cliente2.setEmail("user@user");

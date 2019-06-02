@@ -12,6 +12,7 @@ import br.ufscar.dc.dsw.pojo.Cliente;
 import br.ufscar.dc.dsw.pojo.Locacao;
 import br.ufscar.dc.dsw.pojo.Locadora;
 import java.io.IOException;
+import java.util.List;
 import javax.persistence.EntityManager;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,30 +25,42 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  *
  * @author pedro
  */
-@WebServlet(name="Nova Locacao Servlet", urlPatterns = {"/user/novaLocacao"})
+@WebServlet(name = "Nova Locacao Servlet", urlPatterns = {"/user/novaLocacao"})
 public class NovaLocacaoServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-
         try {
             LocacaoDAO locacaoDAO = new LocacaoDAO();
             ClienteDAO clienteDAO = new ClienteDAO();
             LocadoraDAO locadoraDAO = new LocadoraDAO();
-            
+
             Locacao locacao = new Locacao();
             locacao.setCpfclienteId(clienteDAO.getCpf(request.getParameter("cpf")));
-            if(locadoraDAO.getCnpj(request.getParameter("cnpj")) == null){
+            Locadora locadora = locadoraDAO.getCnpj(request.getParameter("cnpj"));
+            if (locadoraDAO.getCnpj(request.getParameter("cnpj")) == null) {
                 request.setAttribute("mensagem", "CNPJ Invalido");
                 request.getRequestDispatcher("erro.jsp").forward(request, response);
+            } else {
+                locacao.setCnpjlocadoraId(locadoraDAO.getCnpj(request.getParameter("cnpj")));
+                locacao.setDataHora(java.sql.Date.valueOf(request.getParameter("data")));
+
+                List<Locacao> locacoes = locacaoDAO.getAll();
+
+                for (Locacao loc : locacoes) {
+                    if (loc.getCnpjlocadoraId().getCnpj().equals(request.getParameter("cnpj"))) {
+                        if (loc.getDataHora().equals(java.sql.Date.valueOf(request.getParameter("data")))) {
+                            request.setAttribute("mensagem", "Já existe locação para essa locadora neste horário");
+                            request.getRequestDispatcher("erro.jsp").forward(request, response);
+                        }
+                    }
+                }
+
+                locacaoDAO.save(locacao);
+                request.setAttribute("mensagem", "Locacao adicionado!");
+                response.sendRedirect("verLocacoesCliente");
             }
-            locacao.setCnpjlocadoraId(locadoraDAO.getCnpj(request.getParameter("cnpj")));
-            locacao.setDataHora( java.sql.Date.valueOf(request.getParameter("data")));
-            
-            locacaoDAO.save(locacao);
-            request.setAttribute("mensagem", "Locacao adicionado!");
-            response.sendRedirect("verLocacoesCliente");
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("mensagem", e.getLocalizedMessage());
@@ -95,4 +108,3 @@ public class NovaLocacaoServlet extends HttpServlet {
     }// </editor-fold>
 
 }
-

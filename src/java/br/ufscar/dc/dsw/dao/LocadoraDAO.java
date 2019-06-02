@@ -144,13 +144,13 @@ public class LocadoraDAO extends GenericDAO<Locadora> {
         Query q = em.createNamedQuery("Locadora.findByCnpj", Locadora.class);
         q.setParameter("cnpj", cnpj);
         List<Locadora> locadoras = q.getResultList();
-        em.close();
         Locadora locadora;
         if(locadoras.isEmpty()){
             locadora = null;
         } else{ 
-            locadora = locadoras.get(0);
+            locadora = locadoras.get(q.getFirstResult());
         }
+        em.close();
         return locadora;
     }
     
