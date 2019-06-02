@@ -20,7 +20,7 @@ import javax.persistence.Query;
 public class PapelDAO extends GenericDAO<Papel> {
 
     @Override
-    Papel get(Long id) {
+    Papel get(Integer id) {
         EntityManager em = this.getEntityManager();
         Papel papel = em.find(Papel.class, id);
         em.close();

@@ -20,7 +20,7 @@ import javax.persistence.Query;
 public class UsuarioDAO extends GenericDAO<Usuario>{
 
     @Override
-    Usuario get(Long id) {
+    Usuario get(Integer id) {
         EntityManager em = this.getEntityManager();
         Usuario usuario = em.find(Usuario.class, id);
         em.close();

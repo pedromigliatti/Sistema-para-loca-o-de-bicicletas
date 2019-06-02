@@ -121,7 +121,7 @@ public class ClienteDAO extends GenericDAO<Cliente> {
     }
     
     @Override
-    public Cliente get(Long id) {
+    public Cliente get(Integer id) {
         EntityManager em = this.getEntityManager();
         Cliente cliente = em.find(Cliente.class, id);
         em.close();
