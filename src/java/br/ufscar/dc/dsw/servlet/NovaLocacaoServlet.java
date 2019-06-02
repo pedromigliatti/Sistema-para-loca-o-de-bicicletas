@@ -38,6 +38,10 @@ public class NovaLocacaoServlet extends HttpServlet {
             
             Locacao locacao = new Locacao();
             locacao.setCpfclienteId(clienteDAO.getCpf(request.getParameter("cpf")));
+            if(locadoraDAO.getCnpj(request.getParameter("cnpj")) == null){
+                request.setAttribute("mensagem", "CNPJ Invalido");
+                request.getRequestDispatcher("erro.jsp").forward(request, response);
+            }
             locacao.setCnpjlocadoraId(locadoraDAO.getCnpj(request.getParameter("cnpj")));
             locacao.setDataHora( java.sql.Date.valueOf(request.getParameter("data")));
             

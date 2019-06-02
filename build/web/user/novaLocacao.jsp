@@ -22,7 +22,7 @@
 		<script type="text/javascript" src="jquery.mask.min.user.js"></script>	
 		<script type="text/javascript">
 		$(document).ready(function(){
-			$("#cpf").mask("000.000.000-00")
+			$("#cnpj").mask("00.000.000/0000-00")
 			
 		})
 		</script>
@@ -39,7 +39,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="data"><f:message key="new.renting.info1.label"/></label>  
                     <div class="col-md-4">
-                        <input id="nascimento" name="data" type="data" placeholder="data" class="form-control input-md" required="">
+                        <input id="data" name="data" type="date" placeholder="data" class="form-control input-md" required="">
 
                     </div>
                 </div>
@@ -57,7 +57,7 @@
                 <div class="form-group" hidden>
                     <label class="col-md-4 control-label" for="cpf"><f:message key="new.renting.info2.label"/></label>  
                     <div class="col-md-4">
-                        <input id="email" name="cpf" type="text" placeholder="CPF Cliente" class="form-control input-md" required=""value="${cpf}">
+                        <input id="cpf" name="cpf" type="text" placeholder="CPF Cliente" class="form-control input-md" required=""value="${cpf}">
 
                     </div>
                 </div>
@@ -66,7 +66,7 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="cnpj"><f:message key="new.renting.info3.label"/></label>  
                     <div class="col-md-4">
-                        <input id="email" name="cnpj" type="text" placeholder="CNPJ Locadora" class="form-control input-md" required="">
+                        <input id="cnpj" name="cnpj" type="text" placeholder="CNPJ Locadora" class="form-control input-md" required="">
 
                     </div>
                 </div>

@@ -81,7 +81,15 @@
             <a class="myButtonEdit" href="adicionaCliente"><f:message key="show.client.option3.label"/></a>
             <br>
             <br>
-            <a class="myButtonEdit" href="http://localhost:8080/Sistema-para-locacao-de-bicicletas/adminIndex.jsp"><f:message key="show.client.option4.label"/></a>
+            <a class="myButtonEdit"  onclick="goBack()"><f:message key="show.client.option4.label"/></a>
+            
+        
+
+<script>
+function goBack() {
+  window.history.back();
+}
+</script> 
     </body>
 </html>
 </f:bundle>
